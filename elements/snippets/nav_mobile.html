@@ -1,0 +1,79 @@
+<div class="nav-mobile flex flex-column">
+    <div class="header-nav">
+        <div class="line flex align-center">
+            <a href="{{ links.central }}" class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36">
+                    <g transform="translate(-15.956 -17)">
+                        <path d="M16,0A16,16,0,1,1,0,16,16,16,0,0,1,16,0Z" transform="translate(18 19)" fill="#4e4e4e"/>
+                        <path  d="M18,0A18,18,0,1,0,36,18,18.053,18.053,0,0,0,18,0Zm0,5.4a5.3,5.3,0,0,1,5.4,5.4A5.3,5.3,0,0,1,18,16.2a5.3,5.3,0,0,1-5.4-5.4A5.3,5.3,0,0,1,18,5.4Zm0,25.56A13.132,13.132,0,0,1,7.2,25.2c0-3.6,7.2-5.58,10.8-5.58S28.8,21.6,28.8,25.2A13.132,13.132,0,0,1,18,30.96Z" transform="translate(15.956 17)" fill="#141414"/>
+                    </g>
+                </svg>
+            </a>
+            <a href="{{ links.central }}" class="account">MINHA CONTA</a> <a href="{{ links.logout }}" class="tray-hide sair" data-logged-user="true"> - Sair</a> 
+            <div class="close-nav">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" width="357px" height="357px" viewBox="0 0 357 357" style="enable-background:new 0 0 357 357;" xml:space="preserve">
+                    <polygon points="357,35.7 321.3,0 178.5,142.8 35.7,0 0,35.7 142.8,178.5 0,321.3 35.7,357 178.5,214.2 321.3,357 357,321.3     214.2,178.5   "></polygon>
+                </svg>
+            </div>
+        </div>
+        <div class="bars">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <form class="search-mob" action="{{ links.search }}" method="get">
+            <input type="hidden" name="loja" value="{{ store.id }}">
+            <input class="input-search" placeholder="Digite o que está procurando" spellcheck="false" autocomplete="off" autocorrect="off" type="text" name="palavra_busca">
+            <button class="button-search">
+                <svg class="icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512"><path d="M495,466.2L377.2,348.4c29.2-35.6,46.8-81.2,46.8-130.9C424,103.5,331.5,11,217.5,11C103.4,11,11,103.5,11,217.5   S103.4,424,217.5,424c49.7,0,95.2-17.5,130.8-46.7L466.1,495c8,8,20.9,8,28.9,0C503,487.1,503,474.1,495,466.2z M217.5,382.9   C126.2,382.9,52,308.7,52,217.5S126.2,52,217.5,52C308.7,52,383,126.3,383,217.5S308.7,382.9,217.5,382.9z"></path></svg>
+            </button>
+        </form>
+    </div>
+    <div class="content-nav flex-grow">
+        <ul class="list-nav">
+            {% for level1 in categories %}
+            <li>
+                <a href="{{ level1.link }}" class="{{ settings.icon_menu ? 'space' }} {{ level1.children ? 'sub' }}">
+                    {% if level1.images and settings.icon_menu %}
+                    <div class="icon flex align-center justify-center">
+                        <img src="{{ level1.images[0] }}" alt="{{ level1.name }}">
+                    </div>
+                    {% endif %}
+                    <span class="text">{{ level1.name }}</span>
+                    <i class="ico"></i>
+                </a>
+                {% if level1.children %}
+                <ul>
+                {% for level2 in level1.children %}
+                <li>
+                    <a class="{{ level2.children ? 'sub' }}" href="{{ level2.link }}">
+                        {{ level2.name }}
+                        <i class="ico"></i>
+                    </a>
+                    {% if level2.children %}
+                    <ul>
+                        {% for level3 in level2.children %}
+                        <li>
+                            <a href="{{ level3.link }}">{{ level3.name }}</a>
+                        </li>
+                        {% endfor %}
+                        <li>
+                            <a href="{{ level2.link }}">Ver categoria</a>
+                        </li>
+                    </ul>
+                    {% endif %}
+                </li>
+                {% endfor %}
+                <li>
+                    <a href="{{ level1.link }}">Ver categoria</a>
+                </li>
+            </ul>
+            {% endif %}
+               
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>

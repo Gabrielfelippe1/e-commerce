@@ -1,0 +1,2146 @@
+<style>
+
+    #content_form_dinamic{
+        border-radius: 3px;
+        border: 1px solid #eee;
+        padding: 15px;
+    }
+    
+    #form-content {
+        background: #f7f7f7 !important;
+    }
+    
+    #form-content .form-group{
+        background: #fff;
+    }
+    
+    #help-content{
+        display: none;
+    }
+    
+    .space-title{
+        margin-top: 15px;
+        margin-bottom: 5px;
+        font-size: 13px;
+    }
+    
+    .panel-group {
+        margin-bottom: 15px;
+    }
+    
+    .panel-group .panel-heading {
+        background: #f7f7f7;
+    }
+    
+    .panel-group .panel-heading a{
+        color: #000;
+    }
+
+    .form-group h2 i{
+        float: left;
+        margin-right: 15px;
+    }
+    
+    .form-group h2 b{
+        color: #000;
+        line-height: 40px;
+    }
+
+    .structures h4{
+        text-align: center;
+    }
+    
+    .structures label{
+        display: block;
+        text-align: center;
+    }
+    
+    .structures label:hover,
+    .structures input:hover{
+        cursor: pointer;
+    }
+    
+    .structures img{
+        display: block;
+        margin: 0 auto;
+    }
+    
+    .remove-bg{
+        cursor: pointer;
+    }
+    
+    .row-social .input-group-addon{
+        line-height: 18px;
+        text-align: left;
+        width: 145px;
+    }
+    
+    .row-social .input-group-addon svg{
+        display: inline-block;
+        border-radius: 3px;
+        vertical-align: top;
+    }
+    
+    radio, label{
+        font-size: 1.5rem;
+    }
+</style>
+
+<script>
+    jQuery(".collapse-title").click(function(){
+        $(this).parents(".panel-heading").siblings(".collapse-content").slideToggle();
+    });
+
+    (function($){
+        $('.remove-img').click(function(){
+            $(this).parents('.file').find('img').remove();
+            $(this).parents('.file').find(':hidden').val('');
+            return false;
+        });
+
+        // netzee
+        $('.panel-html').parents('.row').wrap('<div class="netzee-panel"></div>');
+
+        $('.list-edit-tabs .box').click(function(){
+            $(this).addClass('active').siblings().removeClass('active');
+            $('.content-editor .tab-option:eq('+$(this).index()+')').addClass('active').siblings().removeClass('active');
+        });
+
+        $('.remove-img').click(function(){
+            $(this).parents('.box-file').addClass('removed');
+        });
+
+        $('.box-file').find('input:first').each(function(){
+            console.log('true', 1);
+            if($(this).attr('type') !== "hidden" || $(this).val() == ''){
+                $(this).parents('.box-file').addClass('removed').find('.area-file > div').remove();
+            } 
+        });
+    }(jQuery));  
+</script>
+
+
+<link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,600,700" rel="stylesheet">
+<style>
+    /* flex */
+
+.flex{
+    display: flex;
+}
+
+.flex-column{
+    flex-direction: column;
+}
+
+.justify-between{
+    justify-content: space-between;
+}
+
+.justify-around{
+    justify-content: space-around;
+}
+
+.justify-center{
+    justify-content: center;
+}
+
+.justify-start{
+    justify-content: flex-start;
+}
+
+.justify-end{
+    justify-content: flex-end;
+}
+
+.align-start{
+    align-items: flex-start;
+}
+
+.align-center{
+    align-items: center;
+}
+
+.align-end{
+    align-items: flex-end;
+}
+
+.justify-self-end{
+    justify-self: end;
+}
+
+.align-content-center{
+    align-items: center;
+}
+
+.align-self-center{
+    align-self: center;
+}
+
+.align-self-start{
+    align-self: flex-start;
+}
+
+.align-self-end{
+    align-self: flex-end;
+}
+
+.align-self-base{
+    align-self: baseline;
+}
+
+.f-wrap{
+    flex-wrap: wrap;
+}
+
+.flex-grow{
+    flex-grow: 1;
+}
+
+
+    .netzee-panel{
+        background: #fff;
+        font-family: "Montserrat", Arial !important;
+        color: #707070;
+        font-size: 16px;
+    }
+
+    .netzee-panel #content_form_dinamic{
+        padding: 0;
+        margin: 0;
+        
+        border: 0;
+    }
+
+    .netzee-panel #form-content{
+        background: transparent !important;
+    }
+
+    .netzee-panel *{
+        font-family: inherit !important;
+        outline: 0;
+    }
+
+    .netzee-panel > .row > .col-md-4{
+        display: none;
+    }
+
+    .netzee-panel > .row > .col-md-8{
+        width: 100% !important;
+    }
+
+    .netzee-panel .title-section{
+        font-size: 26px;
+        font-weight: 400;
+        color: #323232;
+        font-weight: 600;
+    }
+
+    .netzee-panel .title-section .icon{
+        margin-right: 5px;
+    }
+
+    .netzee-panel .container{
+        width: 1150px !important;
+    }
+
+    .netzee-panel .list-theme{
+        list-style: none;
+        margin: 20px 0 40px;
+    }
+
+    .netzee-panel .list-theme li{
+        padding-left: 23px;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12.201' height='11.667' viewBox='0 0 12.201 11.667'%3E%3Cdefs%3E%3Cstyle%3E .cls-1 %7B fill: %231caffc; %7D %3C/style%3E%3C/defs%3E%3Cg id='check' transform='translate(0 -11.206)'%3E%3Cg id='Group_19' data-name='Group 19' transform='translate(0 11.206)'%3E%3Cg id='Group_18' data-name='Group 18' transform='translate(0)'%3E%3Cpath id='Path_13' data-name='Path 13' class='cls-1' d='M11.174,16.053a.493.493,0,0,0-.493.493v.5a4.848,4.848,0,0,1-4.848,4.845h0a4.848,4.848,0,0,1,0-9.7h0a4.818,4.818,0,0,1,1.97.42.493.493,0,0,0,.4-.9,5.8,5.8,0,0,0-2.371-.505h0a5.833,5.833,0,0,0,0,11.667h0a5.833,5.833,0,0,0,5.833-5.83v-.5A.493.493,0,0,0,11.174,16.053Z' transform='translate(0 -11.206)'/%3E%3C/g%3E%3C/g%3E%3Cg id='Group_21' data-name='Group 21' transform='translate(3.738 11.743)'%3E%3Cg id='Group_20' data-name='Group 20'%3E%3Cpath id='Path_14' data-name='Path 14' class='cls-1' d='M165.2,33.89a.493.493,0,0,0-.7,0l-5.526,5.526-1.254-1.254a.493.493,0,0,0-.7.7l1.6,1.6a.493.493,0,0,0,.7,0l5.875-5.875A.493.493,0,0,0,165.2,33.89Z' transform='translate(-156.879 -33.746)'/%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        margin: 20px 0 0;
+        font-size: 16px;
+        background-position: left 4px;
+    }
+
+    .netzee-panel a{
+        color: #1caffc;
+        text-decoration: underline;
+    }
+
+    .netzee-panel .content-editor{
+        padding: 33px 0;
+        background: rgba(112, 112, 112, .05);
+    }
+
+    .list-edit-tabs{
+        margin: 0 0 14px;
+    }
+
+    .list-edit-tabs .box{
+        fill: #707070;
+        color: #707070;
+        transition: ease-in-out .3s;
+        cursor: pointer;
+    }
+
+    .list-edit-tabs .box:not(:last-child){
+        border-right: 1px solid #e4e4e4;
+        padding-right: 18px;
+        margin-right: 22px;
+    }
+
+    .list-edit-tabs .first{
+        font-size: 16px;
+        font-weight: 600;
+        text-align: left;
+        letter-spacing: -.2px;
+        white-space: nowrap;
+    }
+    
+    .list-edit-tabs .last{
+        font-size: 11px;
+        text-align: left;
+    }
+
+    .list-edit-tabs .box-icon{
+        margin-right: 12px;
+    }
+
+    .list-edit-tabs .icon{
+        fill: inherit;
+    }
+
+    .list-edit-tabs .box:hover{
+        fill: #323232;
+        color: #323232;
+    }
+
+    .list-edit-tabs .box.active{
+        fill: #1caffc;
+        color: #1caffc;
+    }
+
+    .netzee-panel .tab-option{
+        background-color: #fff;
+        border-radius: 8px;
+        padding: 28px 52px;
+        box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.1);
+        transform: scale(.8);
+        transition: .0s;
+        overflow: hidden;
+        height: 0;
+        opacity: 0;
+    }
+
+    .netzee-panel .tab-option:not(.active){
+        padding: 0;
+    }
+
+    .netzee-panel .tab-option.active{
+        opacity: 1;
+        height: auto;
+        overflow: auto;
+        transition: opacity cubic-bezier(.54,-.65,.48,1.64) .3s, transform cubic-bezier(.54,-.65,.48,1.64) .3s;
+        transform: scale(1);
+    }
+
+    .netzee-panel .title-tab{
+        font-size: 22px;
+        font-weight: bold;
+        margin: 0 0 30px;
+    }
+
+    .netzee-panel .title-tab::after{
+        content: '';
+        display: block;
+        width: 267px;
+        height: 1px;
+        background-color: #1caffc;
+    }
+
+    .netzee-panel .name{
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 1.19;
+        margin-bottom: 3px;
+    }
+
+    .netzee-panel .name .icon{
+        width: 21px;
+        height: 21px;
+        fill: #757575;
+        margin-right: 4px;
+        vertical-align: -4px;
+    }
+
+    .netzee-panel .msg{
+        font-size: 12px;
+        font-weight: 400;
+        line-height: 1.25;
+    }
+
+    .list-radio{
+        margin: 10px 0;
+    }
+
+    .list-radio .option{
+        position: relative;
+        font-weight: 400;
+        font-size: 12px;
+        cursor: pointer;
+    }
+
+    .list-radio .option input{
+        position: absolute;
+        opacity: 0.0001;
+        width: 0;
+        z-index: -1;
+        width: 0;
+        height: 0;
+    }
+
+    .list-radio .option .dot{
+        width: 17px;
+        height: 17px;
+        border-radius: 50%;
+        border: 1px solid #707070;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 6px;
+    }
+
+    .list-radio .option .dot::before{
+        content: '';
+        display: block;
+        width: 11px;
+        height: 11px;
+        border-radius: 50%;
+        background: #707070;
+        opacity: 0;
+        transition: opacity ease-in-out .3s;
+    }
+
+    .list-radio .option input:checked + .dot::before{
+        opacity: 1;
+    }
+
+    .list-radio .option:not(:last-child){
+        margin-right: 21px;
+    }
+
+    .line-regua{
+        margin: 45px -20px 0 0;
+    }
+
+    .netzee-panel .input-panel{
+        height: 34px;
+        border-radius: 8px;
+        border: 1px solid #707070;
+        padding: 0 14px;
+        font-size: 12px;
+        color: #707070;
+        margin-bottom: 20px;
+        transition: ease-in-out .2s;
+        display: block;
+        width: 100%;
+    }
+
+    .input-panel:focus{
+        border-color: #1caffc;
+    }
+
+    .box[data-number]{
+        padding-left: 54px;
+        padding-right: 20px;
+        position: relative;
+        z-index: 1;
+        width: 25%;
+    }
+
+    .area-input{
+        width: 100%;
+        display: block;
+    }
+
+    .box[data-number]:not([data-number=""])::before{
+        content: attr(data-number);
+        display: block;
+        position: absolute;
+        top: -14px;
+        left: 0;
+        border: 1px solid #707070;
+        width: 88px;
+        height: 88px;
+        border-radius: 50%;
+        color: #707070;
+        font-size: 51px;
+        line-height: 86px;
+        font-weight: 700;
+        text-align: center;
+        z-index: -1;
+        opacity: .2;
+    }
+
+    .name-input{
+        font-size: 14px;
+        font-weight: bold;
+        line-height: 1.29;
+        color: #707070;
+        display: block;
+        margin-bottom: 10px;
+        letter-spacing: -.5px;
+    }
+
+    .box[data-number] .msg{
+        margin-top: -8px;
+        margin-bottom: 10px;
+    }
+
+    .col-vitrine .col-content{
+        width: 50%;
+    }
+
+    .col-vitrine .box[data-number]{
+        width: 100%;
+    }
+
+    .col-vitrine + .col-vitrine{
+        margin-top: 43px;
+    }
+
+    .col-content{
+        padding-right: 20px;
+    }
+
+    .col-content + .col-content{
+        border-left: 2px solid #e4e4e4;
+        padding-left: 40px;
+        padding-right: 0;
+    }
+
+    .box-option{
+        margin-bottom: 37px;
+    }
+
+    .box-option .name-input{
+        margin: 10px 0 2px;
+    }
+
+    .list-options{
+        margin: 0 -15px 0 -40px;
+    }
+
+    .list-options .item{
+        width: 33.333%;
+        padding: 0 15px 0 40px;
+        margin-bottom: 34px;
+    }
+
+    .list-options .box-option{
+        margin-bottom: 0;
+    }
+
+    .list-options .item:nth-child(3n-1),
+    .list-options .item:nth-child(3n-2){
+        border-right: 1px solid #e4e4e4;
+    }
+
+    .list-options .item:last-child{
+        border-right: 0;
+    }
+
+    .list-color .item-color{
+        width: calc(100% / 6);
+        margin-bottom: 28px;
+    }
+
+    .box-color{
+        text-align: center;
+    }
+
+    .box-color .input-group-addon{
+        padding: 0;
+        background: transparent;
+        border:0;
+        width: 61px;
+        display: block;
+        margin: auto;
+    }
+
+    .box-color .colorpicker-element .input-group-addon i, .box-color .colorpicker-element .add-on i{
+        width: 61px;
+        height: 61px;
+        border-radius: 50%;
+        border: 1px solid #efefef;
+    }
+
+    .box-color input{
+        height: 25px;
+        border: 0;
+        box-shadow: none;
+        text-align: center;
+        color: #707070;
+        font-size: 12px;
+        width: 62px;
+        padding: 0;
+    }
+
+    .text-color{
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 1.29;
+        margin: 5px 0 0;
+    }
+
+    .colorpicker{
+        margin-top: 6px;
+    }
+
+    .colorpicker:before{
+        left: 22px;
+    }
+
+    .colorpicker:after{
+        left: 23px;
+    }
+
+    .bar-name{
+        font-size: 17px;
+        font-weight: 600;
+        line-height: 55px;
+        display: block;
+        width: 100%;
+        border-radius: 8px;
+        border: 1px solid #e4e4e4;
+        padding: 0 18px;
+        cursor: pointer;
+        position: relative;
+        margin: 0 !important;
+    }
+
+    .bar-name::after{
+        content: '';
+        display: block;
+        position: absolute;
+        right: 22px;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+        height: 0;
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        border-top: 5px solid #000;
+    }
+
+    .theme-color .item{
+        margin-bottom: 20px;
+    }
+
+    .theme-color input[type="checkbox"]:not([name]){
+        display: none;
+    }
+
+    input:checked + .bar-name{
+        background-color: #f8f8f8;
+        border-color: rgba(220, 220, 220, 0.44);
+        border-radius: 8px 8px 0 0;
+    }
+
+    .overflow-content{
+        opacity: 0;
+        height: 0;
+        overflow: hidden;
+        transition: opacity ease-in-out .3s;
+        box-shadow: 0 -4px 0 0 #f8f8f8 inset;
+        border-radius: 0 0 4px 4px;
+    }
+
+    input:checked ~ .overflow-content{
+        height: auto;
+        opacity: 1;
+        padding-top: 32px;
+        overflow: unset;
+    }
+
+    .line-upload{
+        margin: 0 -20px
+    }
+
+    .line-upload .item{
+        width: 25%;
+        padding: 0 20px;
+        margin-bottom: 20px;
+    }
+
+    .box-file{
+        border-radius: 4px;
+        border: 1px solid #e4e4e4;
+        position: relative;
+    }
+
+    .box-file .remove{
+        position: absolute;
+        top: 5;
+        right: 5px;
+        z-index: 2;
+    }
+
+    .box-file .area-file{
+        white-space: nowrap;
+        text-align: center;
+        overflow: hidden;
+        width: 100%;
+        font-size: 12px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 110px;
+    }
+
+    .box-file:not(.removed) input{
+        display: none;
+    }
+
+    .box-file .input-group{
+        width: 100%;
+        display: block;
+    }
+
+    .box-file .form-control{
+        
+    }
+
+    .box-file.removed .remove-img{
+        display: none;
+    }
+
+    .box-file .remove-img{
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(255, 255, 255, .6);
+        opacity: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: ease-in-out .3s;
+        cursor: pointer;
+    }
+
+    .box-file .remove-img::before{
+        content: 'Remover';
+        border-radius: 4px;
+        padding: 5px;
+        color: #fff;
+        background-color: #1caffc;
+        font-size: 14px;
+        
+        
+    }
+
+    .box-file:hover .remove-img{
+        opacity: 1;
+    }
+
+    .box-file img{
+        max-width: 100%;
+        max-height: 100%;
+        display: block;
+        margin: auto;
+        border: 0;
+        padding: 0;
+        margin: 0;
+        border-radius: 0;
+        background: transparent;
+    }
+
+    .marcas .msg{
+        margin-bottom: 20px;
+    }
+
+    .box-file{
+        margin-bottom: 10px;
+    }
+
+    select.input-panel{
+        margin-top: 10px;
+    }
+
+</style>
+<fieldset>
+<input type="hidden" name="extension_id">
+<div class="panel-html">
+    <div class="info-header">
+        <div class="container">
+            <h2 class="title-section flex align-center">
+                <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="26.835" height="27" viewBox="0 0 26.835 27">
+                    <defs>
+                        <style>
+                        .ferramenta {
+                            fill: #1caffc;
+                        }
+                        </style>
+                    </defs>
+                    <g transform="translate(-1.475 0)">
+                        <g transform="translate(1.475 0)">
+                            <path class="ferramenta" d="M7.939,11.371a2.417,2.417,0,0,1,2.031.688L11.312,13.4l1.27-1.264-1.835-1.83a.732.732,0,0,1,1.035-1.035l1.835,1.835,1.27-1.264L13.539,8.495a2.423,2.423,0,0,1-.688-2.031A5.712,5.712,0,0,0,6.344.063a.341.341,0,0,0-.19.576L7.883,2.368a2.1,2.1,0,0,1,0,2.971L6.82,6.4a2.1,2.1,0,0,1-2.971,0L2.114,4.673a.341.341,0,0,0-.576.19,5.712,5.712,0,0,0,6.4,6.507Z" transform="translate(-1.475 0)"/>
+                            <path class="ferramenta" d="M248.868,243.918l-1.27,1.264,7.542,7.542a.732.732,0,1,1-1.035,1.035l-7.542-7.542-1.27,1.264,7.772,7.772a2.524,2.524,0,0,0,3.57-3.57Z" transform="translate(-231.651 -230.271)"/>
+                            <path class="ferramenta" d="M22.9,12.688H26.25l3.351-6.7L27.928,4.318l-6.7,3.346v3.351L12.117,20.1l-1.639-1.634-6.6,6.6a3.521,3.521,0,0,0,4.98,4.98l6.6-6.6-1.673-1.673Z" transform="translate(-2.766 -4.076)"/>
+                        </g>
+                    </g>
+                </svg>
+                <span>Configuração de estilo</span>
+                
+            </h2>
+            <ul class="list-theme">
+                <li>Configure seu layout de acordo com as opções disponíveis.</li>
+                <li>Após realizadas todas as alterações, você poderá comprar este tema e em seguida publica-lo em sua loja.</li>
+                <li>Caso já tenha feito a compra, aguarde nossa confirmação do pagamento para tornar este layout padrão de sua loja.</li>
+            </ul>
+            <div class="list-edit-tabs flex justify-between">
+                <div class="box flex align-center active">
+                    <div class="box-icon">
+                        <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="45.267" height="45.267" viewBox="0 0 45.267 45.267">
+                            <g transform="translate(0 0)">
+                                <path class="cls-1" d="M39.942,13.356,39,12.412l5-5A4.344,4.344,0,1,0,37.85,1.273l-5,5-.944-.944a.729.729,0,0,0-1.032,0l-2.19,2.19a.729.729,0,0,0,0,1.032l.944.944L23.92,15.2a16.081,16.081,0,1,0,6.143,6.143l5.712-5.711.944.944a.73.73,0,0,0,1.032,0l2.19-2.19a.729.729,0,0,0,0-1.032ZM38.883,2.305a2.884,2.884,0,1,1,4.078,4.078l-5,5L33.887,7.3Zm-4.14,12.3h-3.3a4.353,4.353,0,0,0-3.1,1.283l-.052.052a2.9,2.9,0,0,1-2.064.856H24.4l6.269-6.269Zm-8.5,15.332h4.381a14.524,14.524,0,0,1-3.754,9.05l-3.1-3.1a10.157,10.157,0,0,0,2.469-5.953ZM15.332,19.02a10.161,10.161,0,0,0-5.953,2.469l-3.1-3.1a14.523,14.523,0,0,1,9.05-3.754Zm-6.986,3.5a10.163,10.163,0,0,0-2.469,5.953H1.5a14.524,14.524,0,0,1,3.754-9.05ZM5.878,29.934a10.161,10.161,0,0,0,2.469,5.953l-3.1,3.1A14.524,14.524,0,0,1,1.5,29.934Zm3.5,6.986a10.163,10.163,0,0,0,5.953,2.469v4.381a14.524,14.524,0,0,1-9.05-3.754Zm7.413,2.469a10.161,10.161,0,0,0,5.953-2.469l3.1,3.1a14.523,14.523,0,0,1-9.05,3.754Zm-.73-1.423A8.761,8.761,0,1,1,20.43,21.613l-1.51,1.51a2.279,2.279,0,0,0,3.223,3.223l1.51-1.51a8.756,8.756,0,0,1-7.591,13.129ZM21.11,25.314a.819.819,0,0,1-1.158-1.158l3.927-3.927a.731.731,0,0,0,.177-.747l-.41-1.23h2.585a4.354,4.354,0,0,0,3.1-1.283l.052-.052a2.9,2.9,0,0,1,2.065-.856h1.836L27.547,21.8l-1.763-.588a.73.73,0,0,0-.747.177Zm1.007-8.308a.731.731,0,0,0-.177.747l.588,1.763L21.493,20.55a10.123,10.123,0,0,0-4.7-1.54V14.627a14.563,14.563,0,0,1,6.056,1.647Zm8.522,11.468H26.256a10.114,10.114,0,0,0-1.539-4.7l1.035-1.035,1.763.588a.727.727,0,0,0,.747-.177l.732-.732a14.579,14.579,0,0,1,1.646,6.057Zm6.6-13.444-7-7,1.158-1.158,7,7Zm0,0" transform="translate(0 0)"/>
+                                <path class="cls-1" d="M422.571,416H416.73a.731.731,0,0,0-.73.73v5.841a.731.731,0,0,0,.73.73h5.841a.731.731,0,0,0,.73-.73V416.73A.731.731,0,0,0,422.571,416Zm-.73,5.841H417.46V417.46h4.381Zm0,0" transform="translate(-378.034 -378.034)"/>
+                                <path class="cls-1" d="M422.571,320H416.73a.731.731,0,0,0-.73.73v5.841a.731.731,0,0,0,.73.73h5.841a.731.731,0,0,0,.73-.73V320.73A.731.731,0,0,0,422.571,320Zm-.73,5.841H417.46V321.46h4.381Zm0,0" transform="translate(-378.034 -290.796)"/>
+                                <path class="cls-1" d="M422.571,224H416.73a.731.731,0,0,0-.73.73v5.841a.731.731,0,0,0,.73.73h5.841a.731.731,0,0,0,.73-.73V224.73A.731.731,0,0,0,422.571,224Zm-.73,5.841H417.46V225.46h4.381Zm0,0" transform="translate(-378.034 -203.557)"/>
+                            </g>
+                        </svg>
+                    </div>
+                    <div class="text-right">
+                        <div class="first">Cores e Layout</div>
+                        <div class="last">Personalize cores da loja</div>
+                    </div>
+                </div>
+                <div class="box flex align-center">
+                    <div class="box-icon">
+                        <svg class="icon" width="39" height="39" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="m316 346c-5.519531 0-10 4.480469-10 10s4.480469 10 10 10 10-4.480469 10-10-4.480469-10-10-10zm0 0"/><path d="m462 0h-412c-27.570312 0-50 22.429688-50 50v306c0 27.570312 22.429688 50 50 50h156v46h-10c-13.351562 0-25.902344 5.203125-35.351562 14.648438-9.445313 9.449218-14.648438 22-14.648438 35.351562 0 5.523438 4.476562 10 10 10h200c5.523438 0 10-4.476562 10-10 0-27.570312-22.429688-50-50-50h-10v-46h156c27.570312 0 50-22.429688 50-50v-306c0-27.570312-22.429688-50-50-50zm-412 20h412c16.542969 0 30 13.457031 30 30v256h-46v-230c0-5.523438-4.476562-10-10-10h-80c-5.523438 0-10 4.476562-10 10v230h-50.054688c-.105468-10.34375-.375-20.539062-.804687-30.429688-1.75-40.726562-5.738281-68.007812-7.8125-80.007812 20.632813-15.191406 26.265625-43.347656 13.652344-65.222656l-34.660157-60.03125c-1.789062-3.09375-5.089843-5-8.660156-5-3.574218 0-6.875 1.90625-8.660156 5l-34.675781 60.035156c-11.890625 20.625-7.675781 47.339844 11.003906 63.105469-2.164063 11.964843-6.53125 40.222656-8.429687 82.101562-.449219 9.996094-.734376 20.199219-.84375 30.449219h-50.054688v-150c0-1.585938-.375-3.03125-.988281-4.316406-.027344-.050782-.042969-.105469-.066407-.15625l-40-80c-1.695312-3.386719-5.15625-5.527344-8.945312-5.527344s-7.25 2.140625-8.945312 5.527344l-40 80c-.023438.050781-.039063.105468-.0625.15625-.625 1.296875-.992188 2.765625-.992188 4.316406v150h-46v-256c0-16.542969 13.457031-30 30-30zm316 286v-220h60v20h-10c-5.523438 0-10 4.476562-10 10s4.476562 10 10 10h10v30h-10c-5.523438 0-10 4.476562-10 10s4.476562 10 10 10h10v30h-10c-5.523438 0-10 4.476562-10 10s4.476562 10 10 10h10v40h-10c-5.523438 0-10 4.476562-10 10s4.476562 10 10 10h10v20zm-108.339844-100.691406c3.632813 0 7.25-.417969 10.789063-1.199219 1.855469 11.894531 4.582031 32.941406 6.195312 61.890625h-37.222656c1.691406-28.929688 4.546875-50.304688 6.519531-62.601562 4.429688 1.261718 9.042969 1.910156 13.71875 1.910156zm0-20c-22.855468 0-37.59375-24.875-26.011718-44.96875l26.011718-45.03125 25.996094 45.027344c11.539062 20.011718-2.996094 44.972656-25.996094 44.972656zm-21.15625 100.691406h39.019532c.210937 6.570312.355468 13.253906.425781 20h-39.894531c.074218-6.703125.226562-13.386719.449218-20zm-110.503906 20v-140h20v140zm-40 0v-140h20v140zm6.179688-160 23.820312-47.640625 23.820312 47.640625zm252.105468 346h-176.582031c1.46875-4.167969 3.867187-7.988281 7.085937-11.210938 5.671876-5.667968 13.203126-8.789062 21.210938-8.789062h120c13.039062 0 24.160156 8.359375 28.285156 20zm-58.285156-40h-60v-46h60zm176-66h-412c-16.542969 0-30-13.457031-30-30v-30h472v30c0 16.542969-13.457031 30-30 30zm0 0"/><path d="m276 346h-60c-5.523438 0-10 4.476562-10 10s4.476562 10 10 10h60c5.523438 0 10-4.476562 10-10s-4.476562-10-10-10zm0 0"/></svg>
+                    </div>
+                    <div class="text-right">
+                        <div class="first">Banner Régua Fio</div>
+                        <div class="last">Personalize ícones e textos</div>
+                    </div>
+                </div>
+                <div class="box flex align-center">
+                    <div class="box-icon">
+                        <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="44.668" height="39" viewBox="0 0 44.668 39">
+                            <g transform="translate(0 -31.05)">
+                                <g transform="translate(0 31.05)">
+                                    <path class="cls-1" d="M257.281,263.75h-6.069a3.015,3.015,0,0,0-3.012,3.012v4.655a3.015,3.015,0,0,0,3.012,3.012h6.069a3.015,3.015,0,0,0,3.012-3.012v-4.655A3.015,3.015,0,0,0,257.281,263.75Zm.821,7.667a.824.824,0,0,1-.821.821h-6.069a.824.824,0,0,1-.821-.821v-4.655a.824.824,0,0,1,.821-.821h6.069a.824.824,0,0,1,.821.821Z" transform="translate(-225.547 -242.511)"/>
+                                    <path class="cls-1" d="M44.668,43.828a1.017,1.017,0,0,0-.146-.538L37.877,31.607a1.1,1.1,0,0,0-.949-.557H7.731a1.082,1.082,0,0,0-.949.557L.146,43.289A1.107,1.107,0,0,0,0,43.828a6.407,6.407,0,0,0,3.833,5.86V68.955a1.1,1.1,0,0,0,1.1,1.1h34.8a1.1,1.1,0,0,0,1.1-1.1V49.824a.482.482,0,0,0-.009-.119A6.425,6.425,0,0,0,44.668,43.828ZM8.37,33.25h27.92l5.193,9.136H3.185ZM31.79,44.567a4.209,4.209,0,0,1-8.287,0Zm-10.615,0a4.215,4.215,0,0,1-8.3,0Zm-18.911,0h8.3a4.215,4.215,0,0,1-8.3,0ZM18.4,67.86H12.1V56.04a1.56,1.56,0,0,1,1.561-1.561h3.185a1.56,1.56,0,0,1,1.561,1.561V67.86Zm20.235,0H20.591V56.04a3.757,3.757,0,0,0-3.751-3.751H13.654A3.757,3.757,0,0,0,9.9,56.04V67.869H6.024V50.226c.128.009.256.009.383.009a6.4,6.4,0,0,0,5.312-2.829,6.4,6.4,0,0,0,10.624,0,6.384,6.384,0,0,0,10.606,0,6.4,6.4,0,0,0,5.312,2.829c.128,0,.246-.009.374-.009V67.86Zm-.374-19.815a4.207,4.207,0,0,1-4.144-3.468h8.3A4.233,4.233,0,0,1,38.261,48.045Z" transform="translate(0 -31.05)"/>
+                                </g>
+                            </g>
+                        </svg>
+                    </div>
+                    <div class="text-right">
+                        <div class="first">Vitrine</div>
+                        <div class="last">Personalize textos</div>
+                    </div>
+                </div>
+                <div class="box flex align-center">
+                    <div class="box-icon">
+                        <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="31" height="31" viewBox="0 0 31 31">
+                            <path class="cls-1" d="M15.5,0A15.5,15.5,0,1,0,31,15.5,15.5,15.5,0,0,0,15.5,0Zm0,29.063A13.563,13.563,0,1,1,29.063,15.5,13.562,13.562,0,0,1,15.5,29.063Zm5.813-14.531H16.469V9.688a.969.969,0,0,0-1.937,0v4.844H9.688a.969.969,0,0,0,0,1.938h4.844v4.844a.969.969,0,0,0,1.938,0V16.469h4.844a.969.969,0,0,0,0-1.937Z"/>
+                        </svg>
+                    </div>
+                    <div class="text-right">
+                        <div class="first">Itens Adicionais</div>
+                        <div class="last">Adicione filtros e outros</div>
+                    </div>
+                </div>
+                <div class="box flex align-center">
+                    <div class="box-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="36.765" height="39" viewBox="0 0 36.765 39">
+                            <g transform="translate(-13.8)">
+                                <path class="cls-1" d="M43.584,25.055a6.979,6.979,0,0,0-5.523,2.721L27.348,21.792a7,7,0,0,0,.389-2.3,6.842,6.842,0,0,0-.4-2.308l10.706-5.976A6.965,6.965,0,1,0,36.6,6.972,6.808,6.808,0,0,0,37,9.28L26.3,15.257a6.966,6.966,0,1,0,.016,8.462L37.025,29.7a6.969,6.969,0,1,0,6.559-4.648Zm0-22.861A4.786,4.786,0,1,1,38.8,6.98,4.79,4.79,0,0,1,43.584,2.195ZM20.78,24.278a4.786,4.786,0,1,1,4.786-4.786A4.79,4.79,0,0,1,20.78,24.278Zm22.8,12.528A4.786,4.786,0,1,1,48.37,32.02,4.79,4.79,0,0,1,43.584,36.805Z"/>
+                            </g>
+                        </svg>
+                    </div>
+                    <div class="text-right">
+                        <div class="first">Redes Sociais</div>
+                        <div class="last">Adicione redes sociais da sua loja</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content-editor">
+        <div class="container">
+            <div class="tab-option active">
+                <div class="title-tab">Cores e Layout</div>
+                <div class="theme-color">
+                    <div class="item">
+                        <input type="checkbox" id="item-1">
+                        <label for="item-1" class="bar-name">Geral</label>
+                        <div class="overflow-content">
+                            <div class="list-color flex f-wrap">
+                                <div class="item-color">
+                                    <div class="box-color">
+                                        <div class="colorPicker colorpicker-element">
+                                            <span class="input-group-addon"><i style="background: #ffffff;"></i></span>
+                                            <div class="text-color">Cor Principal</div>
+                                            <input name="color_primary" placeholder="#" type="text">
+                                        </div> 
+                                    </div>
+                                </div>
+                                <div class="item-color">
+                                    <div class="box-color">
+                                        <div class="colorPicker colorpicker-element">
+                                            <span class="input-group-addon"><i style="background: #ffffff;"></i></span>
+                                            <div class="text-color">Cor Secundária</div>
+                                            <input name="color_second" placeholder="#" type="text">
+                                        </div> 
+                                    </div>
+                                </div>
+                                <div class="item-color">
+                                    <div class="box-color">
+                                        <div class="colorPicker colorpicker-element">
+                                            <span class="input-group-addon"><i style="background: #ffffff;"></i></span>
+                                            <div class="text-color">Cor dos Textos</div>
+                                            <input name="color_text" placeholder="#" type="text">
+                                        </div> 
+                                    </div>
+                                </div>
+                                <div class="item-color">
+                                    <div class="box-color">
+                                        <div class="colorPicker colorpicker-element">
+                                            <span class="input-group-addon"><i style="background: #ffffff;"></i></span>
+                                            <div class="text-color">Cor dos botões</div>
+                                            <input name="bg_button_primary" placeholder="#" type="text">
+                                        </div> 
+                                    </div>
+                                </div>
+                                <div class="item-color">
+                                    <div class="box-color">
+                                        <div class="colorPicker colorpicker-element">
+                                            <span class="input-group-addon"><i style="background: #ffffff;"></i></span>
+                                            <div class="text-color">Cor dos botões ao passar o mouse</div>
+                                            <input name="bg_button_primary_hover" placeholder="#" type="text">
+                                        </div> 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <input type="checkbox" id="item-2">
+                        <label for="item-2" class="bar-name">Barra do Topo</label>
+                        <div class="overflow-content">
+                            <div class="list-color flex f-wrap">
+                                <div class="item-color">
+                                    <div class="box-color">
+                                        <div class="colorPicker colorpicker-element">
+                                            <span class="input-group-addon"><i style="background: #ffffff;"></i></span>
+                                            <div class="text-color">Cor do Fundo</div>
+                                            <input name="bg_top" placeholder="#" type="text">
+                                        </div> 
+                                    </div>
+                                </div>
+                                <div class="item-color">
+                                    <div class="box-color">
+                                        <div class="colorPicker colorpicker-element">
+                                            <span class="input-group-addon"><i style="background: #ffffff;"></i></span>
+                                            <div class="text-color">Cor do texto</div>
+                                            <input name="top_color" placeholder="#" type="text">
+                                        </div> 
+                                    </div>
+                                </div>
+                                <div class="item-color">
+                                    <div class="box-color">
+                                        <div class="colorPicker colorpicker-element">
+                                            <span class="input-group-addon"><i style="background: #ffffff;"></i></span>
+                                            <div class="text-color">Número carrinho</div>
+                                            <input name="cart_number" placeholder="#" type="text">
+                                        </div> 
+                                    </div>
+                                </div>
+                                <div class="item-color">
+                                    <div class="box-color">
+                                        <div class="colorPicker colorpicker-element">
+                                            <span class="input-group-addon"><i style="background: #ffffff;"></i></span>
+                                            <div class="text-color">Fundo número carrinho</div>
+                                            <input name="cart_number_bg" placeholder="#" type="text">
+                                        </div> 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <input type="checkbox" id="item-3">
+                        <label for="item-3" class="bar-name">Topo</label>
+                        <div class="overflow-content">
+                            <div class="list-color flex f-wrap">
+                                <div class="item-color">
+                                    <div class="box-color">
+                                        <div class="colorPicker colorpicker-element">
+                                            <span class="input-group-addon"><i style="background: #ffffff;"></i></span>
+                                            <div class="text-color">Cor do Fundo</div>
+                                            <input name="header_top" placeholder="#" type="text">
+                                        </div> 
+                                    </div>
+                                </div>
+                                <div class="item-color">
+                                    <div class="box-color">
+                                        <div class="colorPicker colorpicker-element">
+                                            <span class="input-group-addon"><i style="background: #ffffff;"></i></span>
+                                            <div class="text-color">Cor da Borda</div>
+                                            <input name="header_top_border" placeholder="#" type="text">
+                                        </div> 
+                                    </div>
+                                </div>
+                                <div class="item-color">
+                                    <div class="box-color">
+                                        <div class="colorPicker colorpicker-element">
+                                            <span class="input-group-addon"><i style="background: #ffffff;"></i></span>
+                                            <div class="text-color">Cor de fundo categorias</div>
+                                            <input name="nav_bg" placeholder="#" type="text">
+                                        </div> 
+                                    </div>
+                                </div>
+                                <div class="item-color">
+                                    <div class="box-color">
+                                        <div class="colorPicker colorpicker-element">
+                                            <span class="input-group-addon"><i style="background: #ffffff;"></i></span>
+                                            <div class="text-color">Cor do texto categorias</div>
+                                            <input name="nav_color" placeholder="#" type="text">
+                                        </div> 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <input type="checkbox" id="item-4">
+                        <label for="item-4" class="bar-name">Banners</label>
+                        <div class="overflow-content">
+                            <div class="list-color flex f-wrap">
+                                <div class="item-color">
+                                    <div class="box-color">
+                                        <div class="colorPicker colorpicker-element">
+                                            <span class="input-group-addon"><i style="background: #ffffff;"></i></span>
+                                            <div class="text-color">Cor dos circulos</div>
+                                            <input name="banner_dot" placeholder="#" type="text">
+                                        </div> 
+                                    </div>
+                                </div>
+                                <div class="item-color">
+                                    <div class="box-color">
+                                        <div class="colorPicker colorpicker-element">
+                                            <span class="input-group-addon"><i style="background: #ffffff;"></i></span>
+                                            <div class="text-color">Fundo banner de informações</div>
+                                            <input name="banner_info_bg" placeholder="#" type="text">
+                                        </div> 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <input type="checkbox" id="item-5">
+                        <label for="item-5" class="bar-name">Listagem de produtos</label>
+                        <div class="overflow-content">
+                            <div class="list-color flex f-wrap">
+                                <div class="item-color">
+                                    <div class="box-color">
+                                        <div class="colorPicker colorpicker-element">
+                                            <span class="input-group-addon"><i style="background: #ffffff;"></i></span>
+                                            <div class="text-color">Fundo categoria personalizada</div>
+                                            <input name="bg_category_per" placeholder="#" type="text">
+                                        </div> 
+                                    </div>
+                                </div>
+                                <div class="item-color">
+                                    <div class="box-color">
+                                        <div class="colorPicker colorpicker-element">
+                                            <span class="input-group-addon"><i style="background: #ffffff;"></i></span>
+                                            <div class="text-color">Botão Categoria Personalizada</div>
+                                            <input name="bg_button_category_per" placeholder="#" type="text">
+                                        </div> 
+                                    </div>
+                                </div>
+                                <div class="item-color">
+                                    <div class="box-color">
+                                        <div class="colorPicker colorpicker-element">
+                                            <span class="input-group-addon"><i style="background: #ffffff;"></i></span>
+                                            <div class="text-color">Botão Categoria Personalizada ao passar o Mouse</div>
+                                            <input name="bg_button_hover_category_per" placeholder="#" type="text">
+                                        </div> 
+                                    </div>
+                                </div>
+                                <div class="item-color">
+                                    <div class="box-color">
+                                        <div class="colorPicker colorpicker-element">
+                                            <span class="input-group-addon"><i style="background: #ffffff;"></i></span>
+                                            <div class="text-color">Texto Botão Categoria Personalizada </div>
+                                            <input name="color_button_category_per" placeholder="#" type="text">
+                                        </div> 
+                                    </div>
+                                </div>
+                                <div class="item-color">
+                                    <div class="box-color">
+                                        <div class="colorPicker colorpicker-element">
+                                            <span class="input-group-addon"><i style="background: #ffffff;"></i></span>
+                                            <div class="text-color">Cor Texto Categoria Personalizada</div>
+                                            <input name="color_text_category_per" placeholder="#" type="text">
+                                        </div> 
+                                    </div>
+                                </div>
+                                <div class="item-color">
+                                    <div class="box-color">
+                                        <div class="colorPicker colorpicker-element">
+                                            <span class="input-group-addon"><i style="background: #ffffff;"></i></span>
+                                            <div class="text-color">Cor do risco título categoria personalizada</div>
+                                            <input name="color_mark_category_per" placeholder="#" type="text">
+                                        </div> 
+                                    </div>
+                                </div>
+                                <div class="item-color">
+                                    <div class="box-color">
+                                        <div class="colorPicker colorpicker-element">
+                                            <span class="input-group-addon"><i style="background: #ffffff;"></i></span>
+                                            <div class="text-color">Cor da tag desconto</div>
+                                            <input name="tag_desconto_bg" placeholder="#" type="text">
+                                        </div> 
+                                    </div>
+                                </div>
+                                <div class="item-color">
+                                    <div class="box-color">
+                                        <div class="colorPicker colorpicker-element">
+                                            <span class="input-group-addon"><i style="background: #ffffff;"></i></span>
+                                            <div class="text-color">Cor do botão</div>
+                                            <input name="button_details" placeholder="#" type="text">
+                                        </div> 
+                                    </div>
+                                </div>
+                                <div class="item-color">
+                                    <div class="box-color">
+                                        <div class="colorPicker colorpicker-element">
+                                            <span class="input-group-addon"><i style="background: #ffffff;"></i></span>
+                                            <div class="text-color">Cor do preço</div>
+                                            <input name="preco_color" placeholder="#" type="text">
+                                        </div> 
+                                    </div>
+                                </div>
+                                <div class="item-color">
+                                    <div class="box-color">
+                                        <div class="colorPicker colorpicker-element">
+                                            <span class="input-group-addon"><i style="background: #ffffff;"></i></span>
+                                            <div class="text-color">Cor das parcelas em destaque</div>
+                                            <input name="payment_color" placeholder="#" type="text">
+                                        </div> 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <input type="checkbox" id="item-6">
+                        <label for="item-6" class="bar-name">Página do Produto</label>
+                        <div class="overflow-content">
+                            <div class="list-color flex f-wrap">
+                                <div class="item-color">
+                                    <div class="box-color">
+                                        <div class="colorPicker colorpicker-element">
+                                            <span class="input-group-addon"><i style="background: #ffffff;"></i></span>
+                                            <div class="text-color">Cor do nome</div>
+                                            <input name="color_name_product" placeholder="#" type="text">
+                                        </div> 
+                                    </div>
+                                </div>
+                                <div class="item-color">
+                                    <div class="box-color">
+                                        <div class="colorPicker colorpicker-element">
+                                            <span class="input-group-addon"><i style="background: #ffffff;"></i></span>
+                                            <div class="text-color">Cor de fundo tags</div>
+                                            <input name="tags_product_bg" placeholder="#" type="text">
+                                        </div> 
+                                    </div>
+                                </div>
+                                <div class="item-color">
+                                    <div class="box-color">
+                                        <div class="colorPicker colorpicker-element">
+                                            <span class="input-group-addon"><i style="background: #ffffff;"></i></span>
+                                            <div class="text-color">Cor do preço</div>
+                                            <input name="preco_color_product" placeholder="#" type="text">
+                                        </div> 
+                                    </div>
+                                </div>
+                                <div class="item-color">
+                                    <div class="box-color">
+                                        <div class="colorPicker colorpicker-element">
+                                            <span class="input-group-addon"><i style="background: #ffffff;"></i></span>
+                                            <div class="text-color">Cor das parcelas em destaque</div>
+                                            <input name="payment_color_product" placeholder="#" type="text">
+                                        </div> 
+                                    </div>
+                                </div>
+                                <div class="item-color">
+                                    <div class="box-color">
+                                        <div class="colorPicker colorpicker-element">
+                                            <span class="input-group-addon"><i style="background: #ffffff;"></i></span>
+                                            <div class="text-color">Cor Botão Comprar</div>
+                                            <input name="button_buy" placeholder="#" type="text">
+                                        </div> 
+                                    </div>
+                                </div>
+                                <div class="item-color">
+                                    <div class="box-color">
+                                        <div class="colorPicker colorpicker-element">
+                                            <span class="input-group-addon"><i style="background: #ffffff;"></i></span>
+                                            <div class="text-color">Cor Botão Comprar ao Passar o Mouse</div>
+                                            <input name="button_buy_hover" placeholder="#" type="text">
+                                        </div> 
+                                    </div>
+                                </div>
+                                <div class="item-color">
+                                    <div class="box-color">
+                                        <div class="colorPicker colorpicker-element">
+                                            <span class="input-group-addon"><i style="background: #ffffff;"></i></span>
+                                            <div class="text-color">Cor ícone frete</div>
+                                            <input name="icon_frete_color" placeholder="#" type="text">
+                                        </div> 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <input type="checkbox" id="item-7">
+                        <label for="item-7" class="bar-name">Rodapé</label>
+                        <div class="overflow-content">
+                            <div class="list-color flex f-wrap">
+                                <div class="item-color">
+                                    <div class="box-color">
+                                        <div class="colorPicker colorpicker-element">
+                                            <span class="input-group-addon"><i style="background: #ffffff;"></i></span>
+                                            <div class="text-color">Cor do Fundo</div>
+                                            <input name="color_footer" placeholder="#" type="text">
+                                        </div> 
+                                    </div>
+                                </div>
+                                <div class="item-color">
+                                    <div class="box-color">
+                                        <div class="colorPicker colorpicker-element">
+                                            <span class="input-group-addon"><i style="background: #ffffff;"></i></span>
+                                            <div class="text-color">Cor dos textos</div>
+                                            <input name="color_text_footer" placeholder="#" type="text">
+                                        </div> 
+                                    </div>
+                                </div>
+                                <div class="item-color">
+                                    <div class="box-color">
+                                        <div class="colorPicker colorpicker-element">
+                                            <span class="input-group-addon"><i style="background: #ffffff;"></i></span>
+                                            <div class="text-color">Cor das bordas</div>
+                                            <input name="color_border_footer" placeholder="#" type="text">
+                                        </div> 
+                                    </div>
+                                </div>
+                                <div class="item-color">
+                                    <div class="box-color">
+                                        <div class="colorPicker colorpicker-element">
+                                            <span class="input-group-addon"><i style="background: #ffffff;"></i></span>
+                                            <div class="text-color">Cor dos botões</div>
+                                            <input name="color_button_footer" placeholder="#" type="text">
+                                        </div> 
+                                    </div>
+                                </div>
+                                <div class="item-color">
+                                    <div class="box-color">
+                                        <div class="colorPicker colorpicker-element">
+                                            <span class="input-group-addon"><i style="background: #ffffff;"></i></span>
+                                            <div class="text-color">Cor dos botões ao passar o mouse</div>
+                                            <input name="color_button_hover_footer" placeholder="#" type="text">
+                                        </div> 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="title-tab">Logos</div>
+                <div class="line-upload flex">
+                    <div class="item">
+                        <div class="name">Logo da loja</div>
+                        <div class="box-file">
+                            <div class="input-group file">
+                                <div class="area-file">
+                                    <input type="file" class="form-control" accept="image/*" name="logo_dark">
+                                </div>
+                                <a class="remove-img"></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="name">Logo branca da loja</div>
+                        <div class="box-file" style="background-color: #ccc">
+                            <div class="input-group file">
+                                <div class="area-file">
+                                    <input type="file" class="form-control" accept="image/*" name="logo_white">
+                                </div>
+                                <a class="remove-img"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="title-tab">Mais categorias</div>
+                <div class="marcas">
+                    <div class="box-option">
+                        <div class="name">Exibir opção de mais categorias no menu superior?</div>
+                        <div class="list-radio flex">
+                            <label class="option flex align-center">
+                                <input type="radio" name="mais_active" value="1" checked="">
+                                <div class="dot"></div>
+                                <div class="text">Sim</div>
+                            </label>
+                            <label class="option flex align-center">
+                                <input type="radio" name="mais_active" value="0">
+                                <div class="dot"></div>
+                                <div class="text">Não</div>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="msg">* Largura máxima recomendada de 80px</div>
+                    <div class="line-upload flex f-wrap">
+                        <div class="item">
+                            <div class="box-file">
+                                <div class="input-group file">
+                                    <div class="area-file">
+                                        <input type="file" class="form-control" accept="image/*" name="mais_img">
+                                    </div>
+                                    <a class="remove-img"></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="title-tab">Slide de Marcas</div>
+                <div class="marcas">
+                    <div class="box-option">
+                        <div class="name">Exibir Marcas na loja?</div>
+                        <div class="list-radio flex">
+                            <label class="option flex align-center">
+                                <input type="radio" name="brands_active" value="1" checked="">
+                                <div class="dot"></div>
+                                <div class="text">Sim</div>
+                            </label>
+                            <label class="option flex align-center">
+                                <input type="radio" name="brands_active" value="0">
+                                <div class="dot"></div>
+                                <div class="text">Não</div>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="msg">* Subir imagens com largura máxima de 180px</div>
+                    <div class="line-upload flex f-wrap">
+                        <div class="item">
+                            <div class="name">Marca 01</div>
+                            <div class="box-file">
+                                <div class="input-group file">
+                                    <div class="area-file">
+                                        <input type="file" class="form-control" accept="image/*" name="brand_1">
+                                    </div>
+                                    <a class="remove-img"></a>
+                                </div>
+                            </div>
+                            <input type="text" class="input-panel" name="link_marca_1" placeholder="Link da Marca">
+                        </div>
+                        <div class="item">
+                            <div class="name">Marca 02</div>
+                            <div class="box-file">
+                                <div class="input-group file">
+                                    <div class="area-file">
+                                        <input type="file" class="form-control" accept="image/*" name="brand_2">
+                                    </div>
+                                    <a class="remove-img"></a>
+                                </div>
+                            </div>
+                            <input type="text" class="input-panel" name="link_marca_2" placeholder="Link da Marca">
+                        </div>
+                        <div class="item">
+                            <div class="name">Marca 03</div>
+                            <div class="box-file">
+                                <div class="input-group file">
+                                    <div class="area-file">
+                                        <input type="file" class="form-control" accept="image/*" name="brand_3">
+                                    </div>
+                                    <a class="remove-img"></a>
+                                </div>
+                            </div>
+                            <input type="text" class="input-panel" name="link_marca_3" placeholder="Link da Marca">
+                        </div>
+                        <div class="item">
+                            <div class="name">Marca 04</div>
+                            <div class="box-file">
+                                <div class="input-group file">
+                                    <div class="area-file">
+                                        <input type="file" class="form-control" accept="image/*" name="brand_4">
+                                    </div>
+                                    <a class="remove-img"></a>
+                                </div>
+                            </div>
+                            <input type="text" class="input-panel" name="link_marca_4" placeholder="Link da Marca">
+                        </div>
+                        <div class="item">
+                            <div class="name">Marca 05</div>
+                            <div class="box-file">
+                                <div class="input-group file">
+                                    <div class="area-file">
+                                        <input type="file" class="form-control" accept="image/*" name="brand_5">
+                                    </div>
+                                    <a class="remove-img"></a>
+                                </div>
+                            </div>
+                            <input type="text" class="input-panel" name="link_marca_5" placeholder="Link da Marca">
+                        </div>
+                        <div class="item">
+                            <div class="name">Marca 06</div>
+                            <div class="box-file">
+                                <div class="input-group file">
+                                    <div class="area-file">
+                                        <input type="file" class="form-control" accept="image/*" name="brand_6">
+                                    </div>
+                                    <a class="remove-img"></a>
+                                </div>
+                            </div>
+                            <input type="text" class="input-panel" name="link_marca_6" placeholder="Link da Marca">
+                        </div>
+                        <div class="item">
+                            <div class="name">Marca 07</div>
+                            <div class="box-file">
+                                <div class="input-group file">
+                                    <div class="area-file">
+                                        <input type="file" class="form-control" accept="image/*" name="brand_7">
+                                    </div>
+                                    <a class="remove-img"></a>
+                                </div>
+                            </div>
+                            <input type="text" class="input-panel" name="link_marca_7" placeholder="Link da Marca">
+                        </div>
+                        <div class="item">
+                            <div class="name">Marca 08</div>
+                            <div class="box-file">
+                                <div class="input-group file">
+                                    <div class="area-file">
+                                        <input type="file" class="form-control" accept="image/*" name="brand_8">
+                                    </div>
+                                    <a class="remove-img"></a>
+                                </div>
+                            </div>
+                            <input type="text" class="input-panel" name="link_marca_8" placeholder="Link da Marca">
+                        </div>
+                        <div class="item">
+                            <div class="name">Marca 09</div>
+                            <div class="box-file">
+                                <div class="input-group file">
+                                    <div class="area-file">
+                                        <input type="file" class="form-control" accept="image/*" name="brand_9">
+                                    </div>
+                                    <a class="remove-img"></a>
+                                </div>
+                            </div>
+                            <input type="text" class="input-panel" name="link_marca_9" placeholder="Link da Marca">
+                        </div>
+                        <div class="item">
+                            <div class="name">Marca 10</div>
+                            <div class="box-file">
+                                <div class="input-group file">
+                                    <div class="area-file">
+                                        <input type="file" class="form-control" accept="image/*" name="brand_10">
+                                    </div>
+                                    <a class="remove-img"></a>
+                                </div>
+                            </div>
+                            <input type="text" class="input-panel" name="link_marca_10" placeholder="Link da Marca">
+                        </div>
+                        <div class="item">
+                            <div class="name">Marca 11</div>
+                            <div class="box-file">
+                                <div class="input-group file">
+                                    <div class="area-file">
+                                        <input type="file" class="form-control" accept="image/*" name="brand_11">
+                                    </div>
+                                    <a class="remove-img"></a>
+                                </div>
+                            </div>
+                            <input type="text" class="input-panel" name="link_marca_11" placeholder="Link da Marca">
+                        </div>
+                        <div class="item">
+                            <div class="name">Marca 12</div>
+                            <div class="box-file">
+                                <div class="input-group file">
+                                    <div class="area-file">
+                                        <input type="file" class="form-control" accept="image/*" name="brand_12">
+                                    </div>
+                                    <a class="remove-img"></a>
+                                </div>
+                            </div>
+                            <input type="text" class="input-panel" name="link_marca_12" placeholder="Link da Marca">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-option">
+                <div class="title-tab">Banner Régua Fio</div>
+                <div class="box-option">
+                    <div class="name">Exibir Régua Fio?</div>
+                    <div class="list-radio flex">
+                        <label class="option flex align-center">
+                            <input type="radio" name="regua_fio" value="1">
+                            <div class="dot"></div>
+                            <div class="text">Sim</div>
+                        </label>
+                        <label class="option flex align-center">
+                            <input type="radio" name="regua_fio" value="0">
+                            <div class="dot"></div>
+                            <div class="text">Não</div>
+                        </label>
+                    </div>
+                    <div class="msg">*Lembrando que caso não deseje utilizar essa opção poderá cadastrá-lo como banner extra 1</div>
+                    <div class="msg">*Não terão links essas opções e os ícones serão fixos</div>
+                </div>
+                <div class="line-regua flex">
+                    <div class="box" data-number="1">
+                        <label class="area-input">
+                            <span class="name-input">Insira o Titulo do régua fio</span>
+                            <input class="input-panel" type="text" name="linha_fio_title_1" placeholder="">
+                        </label>
+                        <label class="area-input">
+                            <span class="name-input">Insira o Texto do régua fio</span>
+                            <input class="input-panel" type="text" name="linha_fio_description_1" placeholder="">
+                        </label>
+                        <div class="area-input">
+                            <span class="name-input">Ícone</span>
+                            <div class="box-file">
+                                <div class="input-group file">
+                                    <div class="area-file">
+                                        <input type="file" class="form-control" accept="image/*" name="linha_fio_icon_1">
+                                    </div>
+                                    <a class="remove-img"></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box" data-number="2">
+                        <label class="area-input">
+                            <span class="name-input">Insira o Titulo do régua fio</span>
+                            <input class="input-panel" type="text" name="linha_fio_title_2" placeholder="">
+                        </label>
+                        <label class="area-input">
+                            <span class="name-input">Insira o Texto do régua fio</span>
+                            <input class="input-panel" type="text" name="linha_fio_description_2" placeholder="">
+                        </label>
+                        <div class="area-input">
+                            <span class="name-input">Ícone</span>
+                            <div class="box-file">
+                                <div class="input-group file">
+                                    <div class="area-file">
+                                        <input type="file" class="form-control" accept="image/*" name="linha_fio_icon_2">
+                                    </div>
+                                    <a class="remove-img"></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box" data-number="3">
+                        <label class="area-input">
+                            <span class="name-input">Insira o Titulo do régua fio</span>
+                            <input class="input-panel" type="text" name="linha_fio_title_3" placeholder="">
+                        </label>
+                        <label class="area-input">
+                            <span class="name-input">Insira o Texto do régua fio</span>
+                            <input class="input-panel" type="text" name="linha_fio_description_3" placeholder="">
+                        </label>
+                        <div class="area-input">
+                            <span class="name-input">Ícone</span>
+                            <div class="box-file">
+                                <div class="input-group file">
+                                    <div class="area-file">
+                                        <input type="file" class="form-control" accept="image/*" name="linha_fio_icon_3">
+                                    </div>
+                                    <a class="remove-img"></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box" data-number="4">
+                        <label class="area-input">
+                            <span class="name-input">Insira o Titulo do régua fio</span>
+                            <input class="input-panel" type="text" name="linha_fio_title_4" placeholder="">
+                        </label>
+                        <label class="area-input">
+                            <span class="name-input">Insira o Texto do régua fio</span>
+                            <input class="input-panel" type="text" name="linha_fio_description_4" placeholder="">
+                        </label>
+                        <div class="area-input">
+                            <span class="name-input">Ícone</span>
+                            <div class="box-file">
+                                <div class="input-group file">
+                                    <div class="area-file">
+                                        <input type="file" class="form-control" accept="image/*" name="linha_fio_icon_4">
+                                    </div>
+                                    <a class="remove-img"></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-option">
+                <div class="title-tab">Vitrine</div>
+                <div class="col-vitrine flex">
+                    <div class="col-content">
+                        <div class="box" data-number="1">
+                            <label class="area-input">
+                                <span class="name-input">Alterar o título do primeiro bloco de produtos</span>
+                                <div class="msg">* Caso não seja passado não sera exibido esse bloco</div>
+                                <input type="text" class="input-panel" name="text_destaque" placeholder="Bloco referente a produtos em destaque">
+                            </label>
+                            <div class="name-input">Quantidade de produtos</div>
+                            <div class="list-radio flex">
+                                <label class="option flex align-center">
+                                    <input type="radio" name="qnt_destaque" value="4">
+                                    <div class="dot"></div>
+                                    <div class="text">4</div>
+                                </label>
+                                <label class="option flex align-center">
+                                    <input type="radio" name="qnt_destaque" value="8">
+                                    <div class="dot"></div>
+                                    <div class="text">8</div>
+                                </label>
+                                <label class="option flex align-center">
+                                    <input type="radio" name="qnt_destaque" value="12">
+                                    <div class="dot"></div>
+                                    <div class="text">12</div>
+                                </label>
+                                <label class="option flex align-center">
+                                    <input type="radio" name="qnt_destaque" value="16">
+                                    <div class="dot"></div>
+                                    <div class="text">16</div>
+                                </label>
+                                <label class="option flex align-center">
+                                    <input type="radio" name="qnt_destaque" value="20">
+                                    <div class="dot"></div>
+                                    <div class="text">20</div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-content">
+                        <div class="box" data-number="3">
+                            <label class="area-input">
+                                <span class="name-input">Alterar o título do terceiro bloco de produtos</span>
+                                <div class="msg">* Caso não seja passado não sera exibido esse bloco</div>
+                                <input type="text" class="input-panel" name="text_new" placeholder="Bloco referente a produtos em lançamento">
+                            </label>
+                            <div class="name-input">Quantidade de produtos</div>
+                            <div class="list-radio flex">
+                                <label class="option flex align-center">
+                                    <input type="radio" name="qnt_new" value="4">
+                                    <div class="dot"></div>
+                                    <div class="text">4</div>
+                                </label>
+                                <label class="option flex align-center">
+                                    <input type="radio" name="qnt_new" value="8">
+                                    <div class="dot"></div>
+                                    <div class="text">8</div>
+                                </label>
+                                <label class="option flex align-center">
+                                    <input type="radio" name="qnt_new" value="12">
+                                    <div class="dot"></div>
+                                    <div class="text">12</div>
+                                </label>
+                                <label class="option flex align-center">
+                                    <input type="radio" name="qnt_new" value="16">
+                                    <div class="dot"></div>
+                                    <div class="text">16</div>
+                                </label>
+                                <label class="option flex align-center">
+                                    <input type="radio" name="qnt_new" value="20">
+                                    <div class="dot"></div>
+                                    <div class="text">20</div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-vitrine flex">
+                    <div class="col-content">
+                        <div class="box" data-number="2">
+                            <label class="area-input">
+                                <span class="name-input">Categoria do segundo bloco de produtos</span>
+                                <div class="msg">* Caso não seja passado não sera exibido esse bloco</div>
+                                <input type="text" class="input-panel" name="id_category" placeholder="ID da categoria">
+                            </label>
+                        </div>
+                        <div class="box" data-number="">
+                            <label class="area-input">
+                                <span class="name-input">Alterar o título do segundo bloco de produtos</span>
+                                <div class="msg">* Sobrescreverá o nome da categoria no tema</div>
+                                <input type="text" class="input-panel" name="text_category" placeholder="">
+                            </label>
+                        </div>
+                        <div class="box" data-number="">
+                            <label class="area-input">
+                                <span class="name-input">Alterar o texto do segundo bloco de produtos</span>
+                                <div class="msg">"Uma seleção especial para você arrasar com seu moletom"</div>
+                                <input type="text" class="input-panel" name="description_category" placeholder="Uma seleção especial para você arrasar">
+                            </label>
+                        </div>
+                        <div class="box" data-number="">
+                            <div class="area-input">
+                                <span class="name-input">Quantidade de produtos</span>
+                                <div class="list-radio flex">
+                                    <label class="option flex align-center">
+                                        <input type="radio" name="qnt_category" value="3">
+                                        <div class="dot"></div>
+                                        <div class="text">3</div>
+                                    </label>
+                                    <label class="option flex align-center">
+                                        <input type="radio" name="qnt_category" value="6">
+                                        <div class="dot"></div>
+                                        <div class="text">6</div>
+                                    </label>
+                                    <label class="option flex align-center">
+                                        <input type="radio" name="qnt_category" value="9">
+                                        <div class="dot"></div>
+                                        <div class="text">9</div>
+                                    </label>
+                                    <label class="option flex align-center">
+                                        <input type="radio" name="qnt_category" value="12">
+                                        <div class="dot"></div>
+                                        <div class="text">12</div>
+                                    </label>
+                                    <label class="option flex align-center">
+                                        <input type="radio" name="qnt_category" value="15">
+                                        <div class="dot"></div>
+                                        <div class="text">15</div>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="box" data-number="">
+                            <div class="name-input">Imagem de fundo</div>
+                            <div class="msg">Tamanho recomendado: 580px de altura, largura máxima de 778px</div>
+                            <div class="box-file">
+                                <div class="input-group file">
+                                    <div class="area-file">
+                                        <input type="file" class="form-control" accept="image/*" name="img_category">
+                                    </div>
+                                    <a class="remove-img"></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-content">
+                        <div class="box-option">
+                            <div class="name">Exibir produtos em carrossel?</div>
+                            <div class="list-radio flex">
+                                <label class="option flex align-center">
+                                    <input type="radio" name="carrosel_index" value="1">
+                                    <div class="dot"></div>
+                                    <div class="text">Sim</div>
+                                </label>
+                                <label class="option flex align-center">
+                                    <input type="radio" name="carrosel_index" value="0">
+                                    <div class="dot"></div>
+                                    <div class="text">Não</div>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="box-option">
+                            <div class="name">Exibir tag de desconto?</div>
+                            <div class="list-radio flex">
+                                <label class="option flex align-center">
+                                    <input type="radio" name="tag_desconto" value="1">
+                                    <div class="dot"></div>
+                                    <div class="text">Sim</div>
+                                </label>
+                                <label class="option flex align-center">
+                                    <input type="radio" name="tag_desconto" value="0">
+                                    <div class="dot"></div>
+                                    <div class="text">Não</div>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="box-option">
+                            <div class="name">Exibir produtos randômicos?</div>
+                            <div class="list-radio flex">
+                                <label class="option flex align-center">
+                                    <input type="radio" name="home_rand" value="1">
+                                    <div class="dot"></div>
+                                    <div class="text">Sim</div>
+                                </label>
+                                <label class="option flex align-center">
+                                    <input type="radio" name="home_rand" value="0">
+                                    <div class="dot"></div>
+                                    <div class="text">Não</div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-option">
+                <div class="title-tab">Itens Adicionais</div>
+                <div class="list-options flex f-wrap">
+                    <div class="item">
+                        <div class="box-option">
+                            <div class="name">Efeito fade?</div>
+                            <div class="msg">Animação dos banners rotativos</div>
+                            <div class="list-radio flex">
+                                <label class="option flex align-center">
+                                    <input type="radio" name="fade" value="1">
+                                    <div class="dot"></div>
+                                    <div class="text">Sim</div>
+                                </label>
+                                <label class="option flex align-center">
+                                    <input type="radio" name="fade" value="0">
+                                    <div class="dot"></div>
+                                    <div class="text">Não</div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="box-option">
+                            <div class="name">Exibir menu lateral no catálogo?</div>
+                            <div class="list-radio flex">
+                                <label class="option flex align-center">
+                                    <input type="radio" name="col_lateral" value="1">
+                                    <div class="dot"></div>
+                                    <div class="text">Sim</div>
+                                </label>
+                                <label class="option flex align-center">
+                                    <input type="radio" name="col_lateral" value="0">
+                                    <div class="dot"></div>
+                                    <div class="text">Não</div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="box-option">
+                            <div class="name">Depoimentos</div>
+                            <div class="msg">Exibir Depoimentos na Home?</div>
+                            <div class="list-radio flex">
+                                <label class="option flex align-center">
+                                    <input type="radio" name="depoimentos" value="1">
+                                    <div class="dot"></div>
+                                    <div class="text">Sim</div>
+                                </label>
+                                <label class="option flex align-center">
+                                    <input type="radio" name="depoimentos" value="0">
+                                    <div class="dot"></div>
+                                    <div class="text">Não</div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="box-option">
+                            <div class="name">Notícias</div>
+                            <div class="msg">Exibir Notícias na Home?</div>
+                            <div class="list-radio flex">
+                                <label class="option flex align-center">
+                                    <input type="radio" name="noticias" value="1">
+                                    <div class="dot"></div>
+                                    <div class="text">Sim</div>
+                                </label>
+                                <label class="option flex align-center">
+                                    <input type="radio" name="noticias" value="0">
+                                    <div class="dot"></div>
+                                    <div class="text">Não</div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="box-option">
+                            <div class="name">Rastreio</div>
+                            <div class="msg">Exibir o campo de rastreio dos correios na barra superior?</div>
+                            <div class="list-radio flex">
+                                <label class="option flex align-center">
+                                    <input type="radio" name="rastreio" value="1">
+                                    <div class="dot"></div>
+                                    <div class="text">Sim</div>
+                                </label>
+                                <label class="option flex align-center">
+                                    <input type="radio" name="rastreio" value="0">
+                                    <div class="dot"></div>
+                                    <div class="text">Não</div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="box-option">
+                            <div class="name">Exibição das avaliações</div>
+                            <div class="msg">Exibir avaliações na listagem de produtos?</div>
+                            <div class="list-radio flex">
+                                <label class="option flex align-center">
+                                    <input type="radio" name="star_list" value="1">
+                                    <div class="dot"></div>
+                                    <div class="text">Sim</div>
+                                </label>
+                                <label class="option flex align-center">
+                                    <input type="radio" name="star_list" value="0">
+                                    <div class="dot"></div>
+                                    <div class="text">Não</div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="box-option">
+                            <div class="name">Exibir ícones</div>
+                            <div class="msg">Exibir ícones no menu superior</div>
+                            <div class="list-radio flex">
+                                <label class="option flex align-center">
+                                    <input type="radio" name="icon_menu" value="1">
+                                    <div class="dot"></div>
+                                    <div class="text">Sim</div>
+                                </label>
+                                <label class="option flex align-center">
+                                    <input type="radio" name="icon_menu" value="0">
+                                    <div class="dot"></div>
+                                    <div class="text">Não</div>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="box-option" style="margin-top: 30px;">
+                            <div class="name">WhatsApp</div>
+                            <div class="msg">Exibir WhatsApp suspenso</div>
+                            <div class="list-radio flex">
+                                <label class="option flex align-center">
+                                    <input type="radio" name="exibir_whatsapp" value="1">
+                                    <div class="dot"></div>
+                                    <div class="text">Sim</div>
+                                </label>
+                                <label class="option flex align-center">
+                                    <input type="radio" name="exibir_whatsapp" value="0">
+                                    <div class="dot"></div>
+                                    <div class="text">Não</div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="box-option">
+                            <div class="name">Produtos Menu</div>
+                            <div class="msg">Exibir produto no menu superior</div>
+                            <div class="list-radio flex">
+                                <label class="option flex align-center">
+                                    <input type="radio" name="product_menu" value="1">
+                                    <div class="dot"></div>
+                                    <div class="text">Sim</div>
+                                </label>
+                                <label class="option flex align-center">
+                                    <input type="radio" name="product_menu" value="0">
+                                    <div class="dot"></div>
+                                    <div class="text">Não</div>
+                                </label>
+                            </div>
+                            <select name="filter_product" class="input-panel">
+                                <option value="" hidden>Selecione o filtro</option>
+                                <option value="destaque">Em destaque</option>
+                                <option value="lancamento">Em lançamento</option>
+                                <option value="destaque_random">Em destaque e randômico</option>
+                                <option value="lancamento_random">Em lançamento e randômico</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="box-option">
+                            <div class="name">Exibição de subcategorias</div>
+                            <div class="msg">Escolha o tipo de exibição</div>
+                            <div class="list-radio flex">
+                                <label class="option flex align-center">
+                                    <input type="radio" name="category_nivel" value="1">
+                                    <div class="dot"></div>
+                                    <div class="text">1 nível</div>
+                                </label>
+                                <label class="option flex align-center">
+                                    <input type="radio" name="category_nivel" value="0">
+                                    <div class="dot"></div>
+                                    <div class="text">2 níveis</div>
+                                </label>
+                            </div>
+                            <div class="msg">Categorias sem terceiro nível em uma coluna?</div>
+                            <div class="list-radio flex">
+                                <label class="option flex align-center">
+                                    <input type="radio" name="category_nivel_3" value="1">
+                                    <div class="dot"></div>
+                                    <div class="text">Sim</div>
+                                </label>
+                                <label class="option flex align-center">
+                                    <input type="radio" name="category_nivel_3" value="0">
+                                    <div class="dot"></div>
+                                    <div class="text">Não</div>
+                                </label>
+                            </div>
+                            <div class="msg">Escolha o tipo de exibição para "Mais categorias"</div>
+                            <div class="list-radio flex">
+                                <label class="option flex align-center">
+                                    <input type="radio" name="category_nivel_mais" value="1">
+                                    <div class="dot"></div>
+                                    <div class="text">1 nível</div>
+                                </label>
+                                <label class="option flex align-center">
+                                    <input type="radio" name="category_nivel_mais" value="0">
+                                    <div class="dot"></div>
+                                    <div class="text">2 níveis</div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="box-option">
+                            <div class="name">Imagem Produto</div>
+                            <div class="msg">Exibição das imagens na listagem de produtos</div>
+                            <select name="type_img" class="input-panel">
+                                <option value="0">Imagens 180px</option>
+                                <option value="1">Imagens tamanho original</option>
+                            </select>
+                            <div class="msg">Moldura da imagem retangular?</div>
+                            <div class="list-radio flex">
+                                <label class="option flex align-center">
+                                    <input type="radio" name="moldura" value="1">
+                                    <div class="dot"></div>
+                                    <div class="text">Sim</div>
+                                </label>
+                                <label class="option flex align-center">
+                                    <input type="radio" name="moldura" value="0">
+                                    <div class="dot"></div>
+                                    <div class="text">Não</div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="box-option">
+                            <div class="name">Hover de imagens listagem</div>
+                            <div class="msg">Exibir a segunda imagem ao passar o mouse?</div>
+                            <div class="list-radio flex">
+                                <label class="option flex align-center">
+                                    <input type="radio" name="image_list" value="1">
+                                    <div class="dot"></div>
+                                    <div class="text">Sim</div>
+                                </label>
+                                <label class="option flex align-center">
+                                    <input type="radio" name="image_list" value="0">
+                                    <div class="dot"></div>
+                                    <div class="text">Não</div>
+                                </label>
+                            </div>
+                            <div class="msg">Exibir sombra ao passar o mouse?</div>
+                            <div class="list-radio flex">
+                                <label class="option flex align-center">
+                                    <input type="radio" name="dark_img" value="1">
+                                    <div class="dot"></div>
+                                    <div class="text">Sim</div>
+                                </label>
+                                <label class="option flex align-center">
+                                    <input type="radio" name="dark_img" value="0">
+                                    <div class="dot"></div>
+                                    <div class="text">Não</div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="box-option">
+                            <div class="name">Instagram</div>
+                            <div class="msg">Insira o token do instagram, segue um site de exemplo para <a target="_blank" href="http://instagram.pixelunion.net">gerar</a> o Token</div>
+                            <label class="area-input">
+                                <span class="name-input">Token</span>
+                                <input type="text" class="input-panel" name="instagram_token" placeholder="Insira o token">
+                            </label>
+                        </div>
+                    </div>                    
+                </div>
+            </div>
+            <div class="tab-option">
+                <div class="title-tab">Redes Sociais</div>
+                <div class="list-options flex f-wrap">
+                    <div class="item">
+                        <div class="box-option">
+                            <div class="name">
+                                <svg class="icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 510 510">
+                                    <path d="M459,0H51C22.95,0,0,22.95,0,51v408c0,28.05,22.95,51,51,51h408c28.05,0,51-22.95,51-51V51C510,22.95,487.05,0,459,0z     M433.5,51v76.5h-51c-15.3,0-25.5,10.2-25.5,25.5v51h76.5v76.5H357V459h-76.5V280.5h-51V204h51v-63.75    C280.5,91.8,321.3,51,369.75,51H433.5z"/>
+                                </svg>
+                                <span class="">Facebook</span>
+                            </div>
+                            <div class="msg">Insira o link referente ao perfil da sua loja nas redes sociais</div>
+                            <label class="area-input">
+                                <span class="name-input"></span>
+                                <input type="text" class="input-panel" name="social_facebook" placeholder="">
+                            </label>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="box-option">
+                            <div class="name">
+                                <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="m437 0h-362c-41.351562 0-75 33.648438-75 75v362c0 41.351562 33.648438 75 75 75h362c41.351562 0 75-33.648438 75-75v-362c0-41.351562-33.648438-75-75-75zm-180 390c-74.441406 0-135-60.558594-135-135s60.558594-135 135-135 135 60.558594 135 135-60.558594 135-135 135zm150-240c-24.8125 0-45-20.1875-45-45s20.1875-45 45-45 45 20.1875 45 45-20.1875 45-45 45zm0 0"/><path d="m407 90c-8.277344 0-15 6.722656-15 15s6.722656 15 15 15 15-6.722656 15-15-6.722656-15-15-15zm0 0"/><path d="m257 150c-57.890625 0-105 47.109375-105 105s47.109375 105 105 105 105-47.109375 105-105-47.109375-105-105-105zm0 0"/></svg>
+                                <span class="">Instagram</span>
+                            </div>
+                            <div class="msg">Insira o link referente ao perfil da sua loja nas redes sociais</div>
+                            <label class="area-input">
+                                <span class="name-input"></span>
+                                <input type="text" class="input-panel" name="social_instagram" placeholder="">
+                            </label>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="box-option">
+                            <div class="name">
+                                <svg class="icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" width="510px" height="510px" viewBox="0 0 510 510" style="enable-background:new 0 0 510 510;" xml:space="preserve">
+                                    <path d="M459,0H51C22.95,0,0,22.95,0,51v408c0,28.05,22.95,51,51,51h408c28.05,0,51-22.95,51-51V51C510,22.95,487.05,0,459,0z     M280.5,362.1c-20.4,0-40.8-7.649-53.55-22.949l-25.5,81.6l-2.55,5.1l0,0c-5.1,7.65-12.75,12.75-22.95,12.75    c-15.3,0-28.05-12.75-28.05-28.05c0-2.55,0-2.55,0-2.55l0,0l2.55-5.1l45.9-142.801c0,0-5.1-15.3-5.1-38.25    c0-43.35,22.95-56.1,43.35-56.1c17.85,0,35.7,7.65,35.7,33.15c0,33.15-22.95,51-22.95,76.5c0,17.85,15.3,33.149,33.15,33.149    c58.65,0,81.6-45.899,81.6-86.7c0-56.1-48.449-102-107.1-102c-58.65,0-107.1,45.9-107.1,102c0,17.85,5.1,33.15,12.75,48.45    c2.55,5.101,2.55,7.65,2.55,12.75c0,15.3-10.2,25.5-25.5,25.5c-10.2,0-17.85-5.1-22.95-12.75c-12.75-22.95-20.4-48.45-20.4-76.5    c0-84.15,71.4-153,158.1-153s158.1,68.85,158.1,153C413.1,290.7,372.3,362.1,280.5,362.1z"/>
+                                </svg>
+                                <span class="">Pinterest</span>
+                            </div>
+                            <div class="msg">Insira o link referente ao perfil da sua loja nas redes sociais</div>
+                            <label class="area-input">
+                                <span class="name-input"></span>
+                                <input type="text" class="input-panel" name="social_pinterest" placeholder="">
+                            </label>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="box-option">
+                            <div class="name">
+                                <svg class="icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 510 510">
+                                    <path d="M459,0H51C22.95,0,0,22.95,0,51v408c0,28.05,22.95,51,51,51h408c28.05,0,51-22.95,51-51V51C510,22.95,487.05,0,459,0z     M400.35,186.15c-2.55,117.3-76.5,198.9-188.7,204C165.75,392.7,132.6,377.4,102,359.55c33.15,5.101,76.5-7.649,99.45-28.05    c-33.15-2.55-53.55-20.4-63.75-48.45c10.2,2.55,20.4,0,28.05,0c-30.6-10.2-51-28.05-53.55-68.85c7.65,5.1,17.85,7.65,28.05,7.65    c-22.95-12.75-38.25-61.2-20.4-91.8c33.15,35.7,73.95,66.3,140.25,71.4c-17.85-71.4,79.051-109.65,117.301-61.2    c17.85-2.55,30.6-10.2,43.35-15.3c-5.1,17.85-15.3,28.05-28.05,38.25c12.75-2.55,25.5-5.1,35.7-10.2    C425.85,165.75,413.1,175.95,400.35,186.15z"/>
+                                </svg>
+                                <span class="">Twitter</span>
+                            </div>
+                            <div class="msg">Insira o link referente ao perfil da sua loja nas redes sociais</div>
+                            <label class="area-input">
+                                <span class="name-input"></span>
+                                <input type="text" class="input-panel" name="social_twitter" placeholder="">
+                            </label>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="box-option">
+                            <div class="name">
+                                <svg class="icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 18.136 18.136">
+                                    <path d="M16.281,0.001H1.855C0.831,0.001,0,0.83,0,1.855v14.426c0,1.025,0.831,1.854,1.855,1.854h14.426   c1.024,0,1.855-0.828,1.855-1.854V1.855C18.136,0.83,17.306,0.001,16.281,0.001z M10.447,3.063h0.883v2.785   c0,0.535,0.017,0.519,0.035,0.586c0.019,0.071,0.083,0.238,0.29,0.238c0.22,0,0.281-0.176,0.298-0.251   c0.014-0.065,0.03-0.052,0.03-0.61V3.063h0.882v4.18h-0.894l0.011-0.211L11.71,6.919c-0.069,0.14-0.149,0.24-0.247,0.31   c-0.099,0.069-0.21,0.104-0.342,0.104c-0.152,0-0.276-0.033-0.37-0.098c-0.092-0.063-0.156-0.141-0.198-0.24   c-0.046-0.11-0.075-0.229-0.086-0.346c-0.013-0.135-0.02-0.414-0.02-0.83V3.063L10.447,3.063z M7.379,4.801   c0-0.436,0.037-0.773,0.107-1.012C7.552,3.568,7.669,3.394,7.844,3.26c0.178-0.139,0.413-0.208,0.699-0.208   c0.244,0,0.453,0.048,0.624,0.138c0.166,0.088,0.294,0.203,0.381,0.338C9.637,3.67,9.699,3.815,9.732,3.961   c0.034,0.152,0.051,0.398,0.051,0.73v0.736c0,0.432-0.017,0.747-0.048,0.941C9.705,6.546,9.639,6.716,9.54,6.872   C9.441,7.025,9.318,7.139,9.161,7.213C8.999,7.29,8.808,7.33,8.594,7.33c-0.244,0-0.451-0.034-0.617-0.104   C7.823,7.164,7.705,7.074,7.623,6.953C7.539,6.827,7.477,6.672,7.44,6.492C7.4,6.298,7.38,5.996,7.38,5.593L7.379,4.801z    M5.314,1.574l0.718,2.311c0.125-0.604,0.367-1.44,0.559-2.311h0.651L6.404,4.871L6.398,4.897v2.344H5.635V4.897L5.629,4.872   L4.663,1.574H5.314z M15.708,14.501c-0.114,1.04-1.037,1.892-2.072,1.962c-3.048,0.131-6.087,0.131-9.134,0   c-1.036-0.07-1.958-0.922-2.073-1.962c-0.113-1.646-0.113-3.263,0-4.907c0.114-1.04,1.037-1.89,2.073-1.963   c3.047-0.13,6.086-0.13,9.134,0c1.036,0.073,1.958,0.923,2.072,1.963C15.822,11.238,15.822,12.855,15.708,14.501z M8.581,6.83   c0.128,0,0.228-0.077,0.273-0.21C8.875,6.559,8.9,6.443,8.9,6.127V4.316c0-0.366-0.021-0.484-0.043-0.551   C8.812,3.629,8.713,3.55,8.584,3.55c-0.127,0-0.227,0.076-0.274,0.211C8.286,3.826,8.262,3.947,8.262,4.316v1.761   c0,0.346,0.025,0.465,0.047,0.532C8.355,6.749,8.454,6.83,8.581,6.83z M3.617,9.91h0.72H4.48v0.147v4.704h0.904v-4.704V9.91h0.142   h0.723V8.99H3.617V9.91z M7.892,13.105c0,0.521-0.015,0.65-0.027,0.705c-0.031,0.135-0.139,0.217-0.291,0.217   c-0.145,0-0.25-0.078-0.284-0.207c-0.015-0.055-0.031-0.184-0.031-0.68v-2.757H6.403v3.004c0,0.396,0.006,0.66,0.018,0.79   c0.012,0.119,0.043,0.237,0.091,0.348c0.043,0.1,0.108,0.177,0.199,0.236c0.088,0.061,0.205,0.09,0.346,0.09   c0.121,0,0.226-0.031,0.318-0.094c0.095-0.064,0.178-0.166,0.246-0.301l0.271,0.066L7.88,14.766h0.868v-4.383H7.893L7.892,13.105z    M11.678,10.605c-0.047-0.093-0.115-0.162-0.205-0.215c-0.093-0.053-0.207-0.078-0.338-0.078c-0.11,0-0.209,0.027-0.304,0.086   c-0.097,0.062-0.188,0.153-0.27,0.281L10.3,11.082v-0.486V8.991H9.444v5.771h0.808l0.05-0.257l0.07-0.358l0.19,0.308   c0.084,0.138,0.177,0.239,0.275,0.306c0.093,0.062,0.19,0.094,0.296,0.094c0.15,0,0.276-0.053,0.386-0.156   c0.115-0.112,0.186-0.237,0.217-0.389c0.034-0.168,0.051-0.434,0.051-0.416v-2.291c0,0.01,0.034-0.228-0.017-0.701   C11.761,10.803,11.73,10.706,11.678,10.605z M10.933,13.148c0,0.41-0.021,0.535-0.038,0.6c-0.04,0.141-0.141,0.223-0.277,0.223   c-0.132,0-0.233-0.078-0.275-0.215c-0.02-0.062-0.042-0.184-0.042-0.559v-1.161c0-0.39,0.02-0.507,0.038-0.563   c0.039-0.129,0.141-0.207,0.272-0.207c0.135,0,0.237,0.082,0.28,0.221c0.019,0.061,0.044,0.183,0.044,0.551v1.111L10.933,13.148   L10.933,13.148z M13.272,12.702h0.143h1.335v-0.476c0-0.431-0.04-0.925-0.119-1.156c-0.075-0.223-0.202-0.395-0.389-0.528   c-0.181-0.128-0.419-0.195-0.706-0.195c-0.233,0-0.441,0.054-0.618,0.163s-0.3,0.262-0.378,0.469   c-0.082,0.215-0.125,0.521-0.125,1.064v1.345c0,0.173,0.02,0.429,0.056,0.597c0.036,0.162,0.101,0.312,0.193,0.447   c0.087,0.127,0.214,0.23,0.374,0.305c0.164,0.076,0.358,0.115,0.576,0.115c0.223,0,0.409-0.039,0.551-0.113   c0.142-0.075,0.26-0.19,0.354-0.342c0.098-0.158,0.161-0.309,0.187-0.445c0.028-0.143,0.042-0.355,0.042-0.631v-0.205h-0.796v0.472   c0,0.25-0.017,0.413-0.052,0.511c-0.049,0.133-0.162,0.211-0.309,0.211c-0.129,0-0.229-0.064-0.274-0.179   c-0.022-0.054-0.047-0.151-0.047-0.452v-0.838v-0.138h0.002L13.272,12.702z M13.272,12.087v-0.495c0-0.364,0.019-0.309,0.035-0.358   c0.038-0.117,0.141-0.186,0.284-0.186c0.128,0,0.226,0.075,0.265,0.203c0.016,0.052,0.036,0.002,0.036,0.341v0.495v0.139h-0.143   h-0.333h-0.143C13.273,12.226,13.272,12.087,13.272,12.087z"/>
+                                </svg>
+                                <span class="">Youtube</span>
+                            </div>
+                            <div class="msg">Insira o link referente ao perfil da sua loja nas redes sociais</div>
+                            <label class="area-input">
+                                <span class="name-input"></span>
+                                <input type="text" class="input-panel" name="social_yotube" placeholder="">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>  
+</fieldset>

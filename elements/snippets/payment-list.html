@@ -1,0 +1,20 @@
+{% if paymentMethods.order|length %}
+<div class="t">Pagamento à vista</div>
+<ul class="payment-list flex f-wrap">
+    {% for payment in paymentMethods.order %}
+        <li class="payment-form">
+            <img class="lazyload" src="{{ asset('img/square.png') }}" data-src="{{ payment.thumbnail.url }}" alt="{{ payment.display_name }}">
+        </li>
+    {% endfor %}
+</ul>
+{% endif %}
+{% if paymentMethods.credit|length %}
+<div class="t">Pagamento à prazo</div>
+<ul class="payment-list flex f-wrap">
+    {% for payment in paymentMethods.credit %}
+        <li class="payment-form">
+            <img class="lazyload" src="{{ asset('img/square.png') }}" data-src="{{ payment.thumbnail.url }}" alt="{{ payment.display_name }}">
+        </li>
+    {% endfor %} 
+</ul>
+{% endif %}

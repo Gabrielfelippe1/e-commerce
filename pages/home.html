@@ -1,0 +1,202 @@
+<div class="content-home">
+    {% if settings.text_destaque %}
+    {% if settings.home_rand %}
+    {% set productFeatured = Products({
+        'filter': ['featured','available'],
+        'limit': settings.qnt_destaque ? settings.qnt_destaque: 4,
+        'order': 'rand'
+    })
+    %}
+    {% else %}
+    {% set productFeatured = Products({
+        'filter': ['featured','available'],
+        'limit': settings.qnt_destaque ? settings.qnt_destaque: 4,
+    })
+    %}
+    {% endif %}
+    <div class="container">
+        <div class="section-showcase">
+            {% element 'showcase' { 
+                "products": productFeatured,
+                "showcaseTitle": settings.text_destaque,
+                "slide": settings.carrosel_index
+            } %}
+        </div>
+    </div>
+    {% endif %}
+
+    {% if settings.id_category %}
+
+    {% set category = Categories( { "id": settings.id_category } ) %}
+
+    {% if settings.home_rand %}
+    {% set productsCategory = Products({
+        'filter': ['available'],
+        'limit': settings.qnt_category ? settings.qnt_category : 3,
+        'categories': category.id,
+        'order': 'rand'
+    })
+    %}
+    {% else %}
+    {% set productsCategory = Products({
+        'filter': ['available'],
+        'limit': settings.qnt_category ? settings.qnt_category : 3,
+        'categories': category.id
+        
+    })
+    %}
+    {% endif %}
+    <div class="showcase-category">
+        <div class="container">
+            <div class="line flex">
+                <div class="box-text flex align-center">
+                    <div class="center">
+                        <h2 class="title uppercase">{{ settings.text_category ? settings.text_category : category.name }}</h2>
+                        <div class="sub-title uppercase">{{ settings.description_category ? settings.description_category : 'Uma seleção especial para você arrasar' }}</div>
+                        <a class="button-white" href="{{ category.link }}">APROVEITE JÁ!</a>
+                    </div>
+                </div>
+                <div class="cols">
+                    {% if productsCategory|length %}
+                    <div class="slide-category flex">
+                        {% for product in productsCategory %} 
+                        <div class="item flex">
+                            {% element 'snippets/product' {
+                                "product": product,
+                                "slide": '1'
+                            } %}
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    <div class="msg-list white flex justify-center">): Nenhum produto encontrado</div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    <div class="container">
+        {% if settings.text_new %}
+        {% if settings.home_rand %}
+        {% set productNew = Products({
+            'filter': ['new','available'],
+            'limit': settings.qnt_new ? settings.qnt_new: 4,
+            'order': 'rand'
+        })
+        %}
+        {% else %}
+        {% set productNew = Products({
+            'filter': ['new','available'],
+            'limit': settings.qnt_new ? settings.qnt_new: 4,
+        })
+        %}
+        {% endif %}
+        <div class="section-showcase">
+            {% element 'showcase' { 
+                "products": productNew,
+                "showcaseTitle": settings.text_new,
+                "slide": settings.carrosel_index,
+            } %}
+        </div>
+        {% endif %}
+        {% if banners.extra2.type == 'image' or banners.extra3.type == 'image' %}
+        <div class="section-banners">
+            <div class="list flex row">
+                {% if banners.extra2.type == 'image' %}
+                <div class="item">
+                    <a {{ banners.extra2.link ? 'href="'~banners.extra2.link~'"' }}  target="{{ banners.extra2.target }}">
+                        <img class="lazyload" src="{{ asset('img/image-b.png') }}" data-src="{{ banners.extra2.src }}">
+                    </a> 
+                </div>
+                {% endif %}
+                {% if banners.extra3.type == 'image' %}
+                <div class="item">
+                    <a {{ banners.extra3.link ? 'href="'~banners.extra3.link~'"' }}  target="{{ banners.extra3.target }}">
+                        <img class="lazyload" src="{{ asset('img/image-b.png') }}" data-src="{{ banners.extra3.src }}">
+                    </a> 
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+        
+        {% if settings.brands_active %}
+        <div class="section-brands">
+            <div class="list slide-brand">
+                {% for i in 1..12 %}
+                    {% set brandLink = attribute(settings, 'link_marca_'~i) %}
+                    {% set brandImg = attribute(settings, 'brand_'~i) %}
+                    {% if brandImg %}
+                        {% if loop.index == 1 %}
+                        <div class="item">
+                            <a {{ brandLink ? 'href="'~brandLink~'"' }} class="box-brand">
+                                <img class="lazy-first-brand" src="{{ asset('img/square.png') }}" data-src="{{ themePath }}{{ brandImg }}" alt="Brand">
+                            </a>
+                        </div>
+                        {% else %}
+                        <div class="item">
+                            <a {{ brandLink ? 'href="'~brandLink~'"' }} class="box-brand">
+                                <img class="lazy-brand" src="{{ asset('img/square.png') }}" data-src="{{ themePath }}{{ brandImg }}" alt="Brand">
+                            </a>
+                        </div>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+        {% if settings.instagram_token %}
+        <div class="section-instagram" id="instagram" data-token="{{ settings.instagram_token }}">
+            <h2 class="title-section">SIGA NOSSO INSTAGRAM</h2>
+            <div class="overflow">
+                <div class="list flex">
+                    {% if store.id != '679572' %}
+                    <div class="item">
+                    </div>
+                    {% else %}
+                    <div class="item">
+                        <a href="https://www.instagram.com/agencianetzee/" target="_blank" class="box-image">
+                            <img class="lazy-insta transform" data-src="{{ asset('img/i-1.jpg') }}" alt="Instagram">
+                        </a>
+                    </div>
+                    <div class="item">
+                        <a href="https://www.instagram.com/agencianetzee/" target="_blank" class="box-image">
+                            <img class="lazy-insta transform" data-src="{{ asset('img/i-2.jpg') }}" alt="Instagram">
+                        </a>
+                    </div>
+                    <div class="item">
+                        <a href="https://www.instagram.com/agencianetzee/" target="_blank" class="box-image">
+                            <img class="lazy-insta transform" data-src="{{ asset('img/i-3.jpg') }}" alt="Instagram">
+                        </a>
+                    </div>
+                    <div class="item">
+                        <a href="https://www.instagram.com/agencianetzee/" target="_blank" class="box-image">
+                            <img class="lazy-insta transform" data-src="{{ asset('img/i-4.jpg') }}" alt="Instagram">
+                        </a>
+                    </div>
+                    <div class="item">
+                        <a href="https://www.instagram.com/agencianetzee/" target="_blank" class="box-image">
+                            <img class="lazy-insta transform" data-src="{{ asset('img/i-5.jpg') }}" alt="Instagram">
+                        </a>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        {% if settings.noticias %}
+        <div class="section-notices">
+            <h2 class="title-section">NOTÍCIAS E DICAS</h2>
+            <div class="noticias-content">
+            </div>
+        </div>
+        {% endif %}
+        {% if settings.depoimentos %}
+        <div class="section-avaliacoes">
+            <h2 class="title-section">DEPOIMENTOS</h2>
+            {% element 'CustomerReview.reviews' %}
+        </div>
+        {% endif %}
+    </div>
+</div>

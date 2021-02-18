@@ -1,0 +1,48 @@
+<div class="nav-mobile flex flex-column">
+    <div class="header-nav">
+        <a href="{{ links.central }}" class="flex align-center">
+            <div class="icon"></div>
+            <div class="account">MINHA CONTA</div>
+        </a>
+        <div class="bars">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+    <div class="content-nav flex-grow">
+        <ul class="list-nav">
+            {% for level1 in categories %}
+            <li>
+                <a href="{{ level1.link }}" class="space">
+                    <img src="{{  }}" alt="{{ level1.name }}">
+                    <span class="text">{{ level1.name }}</span>
+                </a>
+                <ul>
+                    {% if level1.children %}
+                    {% for level2 in level1.children %}
+                    <li>
+                        <a href="{{ level2.link }}">{{ level2.name }}</a>
+                        {% if level2.children %}
+                        {% for level3 in level2.children %}
+                        <li>
+                            <a href="{{ level3.link }}">{{ level3.name }}</a>
+                        </li>
+                        {% endfor %}
+                        <li>
+                            <a href="{{ level2.link }}">Ver categoria</a>
+                        </li>
+                        {% endif %}
+                    </li>
+                    {% endfor %}
+                    <li>
+                        <a href="{{ level1.link }}">Ver categoria</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>

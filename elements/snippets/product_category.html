@@ -1,0 +1,48 @@
+{% set productCategory = Products({
+    'filter': ['available'],
+    'limit': 1,
+    'categories': [id]
+})
+%}
+
+{% if settings.filter_product == 'destaque' %}
+    {% set productCategory = Products({
+        'filter': ['featured','available'],
+        'limit': 1,
+        'categories': [id]
+    })
+    %}
+{% elseif settings.filter_product == 'lancamento' %}
+    {% set productCategory = Products({
+        'filter': ['new','available'],
+        'limit': 1,
+        'categories': [id]
+    })
+    %}
+{% elseif settings.filter_product == 'destaque_random' %}
+    {% set productCategory = Products({
+        'filter': ['featured','available'],
+        'order': 'rand',
+        'limit': 1,
+        'categories': [id]
+    })
+    %}
+{% elseif settings.filter_product == 'lancamento_random' %}
+    {% set productCategory = Products({
+        'filter': ['new','available'],
+        'order': 'rand',
+        'limit': 1,
+        'categories': [id]
+    })
+    %}
+{% endif %}
+
+{% if productCategory %}     
+<div class="col-product">
+    {% for product in productCategory %} 
+    {% element 'snippets/product' { 
+        "product": product
+    } %}
+    {% endfor %}
+</div>
+{% endif %}

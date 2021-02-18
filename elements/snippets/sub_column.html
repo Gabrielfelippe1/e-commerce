@@ -1,0 +1,93 @@
+<div class="sub-category {{ settings.product_menu and (not mais) ? 'flex product-sub' }}">
+    <ul class="list-sub flex f-wrap">
+        {% if settings.category_nivel_3 %}
+        {% set subs = 0 %}
+
+        {% for level2 in level1 %}
+            {% if not level2.children %}
+            {% set subs = subs + 1 %}
+            {% endif %}
+        {% endfor %}
+
+        {% if subs %}
+
+        {% set total = '' %}
+
+        {% if subs < 13 %}
+            {% set total = 'column-1' %}
+        {% elseif subs < 25 %}
+            {% set total = 'column-2' %}
+        {% elseif subs < 37 %}
+            {% set total = 'column-3' %}
+        {% elseif subs < 49 %}
+            {% set total = 'column-4' %}
+        {% else %}
+            {% set total = 'column-5' %}
+        {% endif %}
+
+        <li class="not-children {{ total }}">
+            <ul>
+            {% for level2 in level1 %}
+                {% if not level2.children %}
+                <li>
+                    <a class="second-nivel" href="{{ level2.link }}">{{ level2.name }}</a>
+                </li>
+                {% endif %}
+            {% endfor %}
+            </ul>
+        </li>
+        {% endif %}
+        {% endif %}
+
+        {% for level2 in level1 %}
+
+        {% set totalCategory = '' %}
+        {% if level2.children %}
+            {% if level2.children|length < 13 %}
+                {% set totalCategory = 'column-1' %}
+            {% elseif level2.children|length < 25 %}
+                {% set totalCategory = 'column-2' %}
+            {% elseif level2.children|length < 37 %}
+                {% set totalCategory = 'column-3' %}
+            {% elseif level2.children|length < 49 %}
+                {% set totalCategory = 'column-4' %}
+            {% else %}
+                {% set totalCategory = 'column-5' %}
+            {% endif %}
+        {% endif %}
+
+        {% if settings.category_nivel_3 %}
+            {% if level2.children %}
+            <li class="{{ totalCategory }}">
+                <a class="second-nivel" href="{{ level2.link }}">{{ level2.name }}</a>
+            
+                <ul class="list-third">
+                    {% for level3 in level2.children %}
+                    <li>
+                        <a class="third-nivel" href="{{ level3.link }}">{{ level3.name }}</a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </li>
+            {% endif %}
+        {% else %}
+            <li class="{{ totalCategory }}">
+                <a class="second-nivel" href="{{ level2.link }}">{{ level2.name }}</a>
+                {% if level2.children %}
+                <ul class="list-third">
+                    {% for level3 in level2.children %}
+                    <li>
+                        <a class="third-nivel" href="{{ level3.link }}">{{ level3.name }}</a>
+                    </li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </li>
+        {% endif %}
+
+        {% endfor %}
+    </ul>
+    {% if settings.product_menu and (not mais) %}
+        {% element 'snippets/product_category' {"id": id } %}
+    {% endif %}
+</div>

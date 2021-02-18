@@ -1,0 +1,12 @@
+<div class="sub-line-category {{ (settings.product_menu and (not mais)) ? 'flex product-sub' }}">
+    <ul class="list-line-sub">
+        {% for level2 in level1 %}
+        <li>
+            <a class="second-nivel" href="{{ level2.link }}">{{ level2.name }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+    {% if settings.product_menu and (not mais) %}
+        {% element 'snippets/product_category' {"id": id} %}
+    {% endif %}
+</div>

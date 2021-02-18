@@ -1,0 +1,93 @@
+{% set loopMais = 7 %}
+<nav class="nav">
+    <div class="container">
+        <ul class="list flex justify-center {{ categories|length > 7 ? 'grow' }}">
+            {% if settings.mais_active %}
+                {% for level1 in categories %}
+                {% if loop.index <= loopMais %}
+
+                {% set countlevel = 1 %}
+                {% if level1.children|length < 8 %}
+
+                    {% for level2 in level1.children %}
+                        {% if level2.children %}
+
+                            {% set countlevel = 0 %}
+
+                        {% endif %}
+                    {% endfor %}
+                {% else %}
+                    {% set countlevel = 0 %}
+                {% endif %}
+
+                <li data-id="{{ level1.id }}" data-level="{{ countlevel }}" class="{{ settings.category_nivel or countlevel ? 'relative' }}">
+                    <a href="{{ level1.link }}" class="{{ settings.icon_menu ? 'icon-show' }}">
+                        {% if settings.icon_menu and level1.images %}<img class="icon" src="{{ level1.images[0] }}" alt="{{ level1.name }}">{% endif %}
+                        <div class="name">{{ level1.name }}</div>
+                    </a>
+                    {% if level1.children %}
+                        {% if settings.category_nivel or countlevel %}
+                            {% element 'snippets/sub_line' {"level1": level1.children,"id": level1.id } %}
+
+                        {% else %}
+                            {% element 'snippets/sub_column' {"level1": level1.children,"id": level1.id } %}
+                        {% endif %}
+                    {% endif %}
+                </li>
+                {% endif %}
+                {% endfor %}
+            {% else %}
+                {% for level1 in categories %}
+
+                {% set countlevel = 1 %}
+                {% if level1.children|length < 9 %}
+
+                    {% for level2 in level1.children %}
+                        {% if level2.children %}
+
+                            {% set countlevel = 0 %}
+
+                        {% endif %}
+                    {% endfor %}
+                {% else %}
+                    {% set countlevel = 0 %}
+                {% endif %}
+
+                <li data-id="{{ level1.id }}" data-level="{{ countlevel }}" class="{{ settings.category_nivel or countlevel ? 'relative' }}">
+                    <a href="{{ level1.link }}" class="{{ settings.icon_menu ? 'icon-show' }}">
+                        {% if settings.icon_menu and level1.images %}<img class="icon" src="{{ level1.images[0] }}" alt="{{ level1.name }}">{% endif %}
+                        <div class="name">{{ level1.name }}</div>
+                    </a>
+                    {% if level1.children %}
+                        {% if settings.category_nivel or countlevel %}
+                            {% element 'snippets/sub_line' {"level1": level1.children, "id": level1.id } %}
+                        {% else %}
+                            {% element 'snippets/sub_column' {"level1": level1.children, "id": level1.id } %}
+                        {% endif %}
+                    {% endif %}
+                </li>
+                {% endfor %}
+            {% endif %}
+            
+            {% if categories|length > loopMais and settings.mais_active %}
+            <li class="{{ settings.category_nivel or settings.category_nivel_mais ? 'relative' }}">
+                <a class="{{ settings.icon_menu ? 'icon-show' }}">
+                    {% if settings.icon_menu and settings.mais_img %}<img class="icon" src="{{ themePath }}{{ settings.mais_img }}" alt="Mais categorias">{% endif %}
+                    <div class="name">{{ settings.icon_menu ? 'Categorias' : 'Mais categorias' }}</div>
+                </a>
+                {% set filterCategory = [] %}
+                {% for list in categories %}
+                    {% if loop.index > loopMais %}
+                    {% set filterCategory = filterCategory|merge([list]) %}
+                    {% endif %}
+                {% endfor %}
+                {% if settings.category_nivel_mais %}
+                    {% element 'snippets/sub_line' {"level1": filterCategory, "mais": 1 } %}
+                {% else %}
+                    {% element 'snippets/sub_column' {"level1": filterCategory, "mais": 1 } %}
+                {% endif %}
+            </li>
+            {% endif %}
+        </ul>
+    </div>
+</nav>

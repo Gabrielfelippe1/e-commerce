@@ -1,0 +1,11 @@
+{% set arrayRating = [1,2,3,4,5] %}
+{% for rating in arrayRating %}
+    {% if nota.rating >= rating %}
+        <div class="icon active"></div>
+    {% else %}
+        <div class="icon"></div>
+    {% endif %}
+{% endfor %}
+{% if total %}
+<span class="total">{{ nota.count }} Opiniões</span>
+{% endif %}

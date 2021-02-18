@@ -1,0 +1,12 @@
+{% if products|length > 0 %}
+    <div class="showcase-catalog">
+        <ul class="list flex f-wrap row">
+        {% for product in products %}
+            {% set ranking = product.ranking %}
+            <li class="item flex">
+                {% element 'snippets/product' {"product": product} %}
+            </li>            
+        {% endfor %}
+        </ul>
+    </div>
+{% endif %}

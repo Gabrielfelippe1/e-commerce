@@ -1,0 +1,232 @@
+<div class="container">
+    
+    <div id="product-container" class="produto-wrapper product-detail">
+        {% if (product.stock > 0 or settings.without_stock_sale) and not product.upon_request %} 
+        <div itemscope itemtype="http://schema.org/Product">
+            {% element 'schema/product' {'product': product} %}
+        </div>
+        {% endif %}
+        <div class="clearfix">
+            {% element 'snippets/breadcrumb' { "class": 'breadcrumb'} %}
+            <div class="box-col-product flex {{ not productHelper.kit() ? 'align-center' }}">
+                <div class="product-colum-left">
+                    {% if product.images %}
+                    <div class="box-gallery flex">
+                        <div class="nav-images">
+                            <div class="list">
+                                {% for images in product.images %}
+                                <div class="item">
+                                    <div class="box-img index-list {{ loop.index == 1 ? 'active' }}" data-id="{{ loop.index }}">
+                                        <img src="{{ images.medium }}" alt="image">
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="image-show">
+                            {% if product.price_offer and settings.tag_desconto %}
+                            {% set porcentagemDesconto = 100 - ( product.price_offer / product.price ) * 100 %}
+                            {% if porcentagemDesconto < 100 %}
+                            <div class="discount-line">-{{ porcentagemDesconto|number_format }}%</div>
+                            {% endif %}
+                            {% endif %}
+                            {% if product.video %}
+                            <div class="video-button" data-url="{{ product.video }}">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 314.068 314.068">
+                                    <path d="M293.002,78.53C249.646,3.435,153.618-22.296,78.529,21.068C3.434,64.418-22.298,160.442,21.066,235.534     c43.35,75.095,139.375,100.83,214.465,57.47C310.627,249.639,336.371,153.62,293.002,78.53z M219.834,265.801     c-60.067,34.692-136.894,14.106-171.576-45.973C13.568,159.761,34.161,82.935,94.23,48.26     c60.071-34.69,136.894-14.106,171.578,45.971C300.493,154.307,279.906,231.117,219.834,265.801z M213.555,150.652l-82.214-47.949     c-7.492-4.374-13.535-0.877-13.493,7.789l0.421,95.174c0.038,8.664,6.155,12.191,13.669,7.851l81.585-47.103     C221.029,162.082,221.045,155.026,213.555,150.652z"></path>
+                                </svg>
+                                <span>VÍDEO</span></div>
+                            {% endif %}
+                            <div class="list">
+                                {% for images in product.images %}
+                                <div class="item">
+                                    <div class="box-img index-list {{ loop.index == 1 ? 'active' }}" data-id="{{ loop.index }}">
+                                        <div class="zoom">
+                                            <img src="{{ loop.index == 1 ? images.full : asset('img/square.png') }}" data-src="{{ images.full }}" data-lazy="{{ images.full }}" alt="{{ product.name }}">
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+                
+                <div class="product-colum-right">
+                    <div class="relative-area">
+                        <div class="fixed-info">
+                            <div id="loading-product-container" class="load-css">
+                                <div class="icon"></div>
+                            </div>
+                            <h1 class="product-name">{{ product.name }}</h1>
+                            {% if product.featured or product.new or product.free_shipping and productHelper.labels() %}
+                                <div class="list-seal-product flex f-wrap justify-center">
+                                    {% if product.featured %}<div class="tag featured">Destaque</div>{% endif %}
+                                    {% if product.new %}<div class="tag new">Lançamento</div>{% endif %}
+                                    {% if product.free_shipping %}<div class="tag shipping">Frete grátis</div>{% endif %}
+                                    
+                                </div>
+                            {% endif %}
+                            {% if productHelper.banner() %}
+                            <div class="product-lote">
+                                {{ productHelper.banner() }}
+                            </div>
+                            {% endif %}
+                            
+                            {% if settings.star_list %}
+                            <div class="list-star flex justify-center">
+                                {% element 'snippets/ranking' {
+                                    'nota': product.ranking,
+                                    'total': true
+                                } %}
+                            </div>
+                            {% endif %}
+                            {% if  productHelper.icons() %}
+                            <div class="list-icons">
+                                {{ productHelper.icons() }}
+                            </div>
+                            {% endif %}
+
+                            {% if productHelper.details() or product.additional_message or settings.show_product_stock %}
+                            <div class="info-product">
+                            {% if settings.show_product_stock %}
+                                <span>Estoque: <b>{{ product.stock }}</b></span>
+                            {% endif %}
+                            {{ productHelper.details() }}
+                            {% if product.additional_message %}
+                                {{ product.additional_message }}
+                            {% endif %}
+                            </div>
+                            {% endif %}
+                            {% if productHelper.bonus() %}{{ productHelper.bonus() }}{% endif %}
+                            <form id="form_comprar" method="post" data-app="product.buy-form" data-id="{{ product.id }}" action="{{ links.cart_add ~ product.id }}">
+                                
+                                {{ productHelper.pricing() }}
+                                <div class="box-variants">
+                                    {{ productHelper.variants() }}
+                                </div>
+                                {{ productHelper.gifts() }}
+                                {{ product.additional_information }}
+                                {{ productHelper.kit() }}
+                                <div class="box-price">
+                                    {{ productHelper.form() }}
+                                </div>
+                                {% if not product.upon_request and product.available and productHelper.wishlist() %}
+                                    <div class="wishlist">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -28 512.001 512" width="20" height="20"><path d="m256 455.515625c-7.289062 0-14.316406-2.640625-19.792969-7.4375-20.683593-18.085937-40.625-35.082031-58.21875-50.074219l-.089843-.078125c-51.582032-43.957031-96.125-81.917969-127.117188-119.3125-34.644531-41.804687-50.78125-81.441406-50.78125-124.742187 0-42.070313 14.425781-80.882813 40.617188-109.292969 26.503906-28.746094 62.871093-44.578125 102.414062-44.578125 29.554688 0 56.621094 9.34375 80.445312 27.769531 12.023438 9.300781 22.921876 20.683594 32.523438 33.960938 9.605469-13.277344 20.5-24.660157 32.527344-33.960938 23.824218-18.425781 50.890625-27.769531 80.445312-27.769531 39.539063 0 75.910156 15.832031 102.414063 44.578125 26.191406 28.410156 40.613281 67.222656 40.613281 109.292969 0 43.300781-16.132812 82.9375-50.777344 124.738281-30.992187 37.398437-75.53125 75.355469-127.105468 119.308594-17.625 15.015625-37.597657 32.039062-58.328126 50.167969-5.472656 4.789062-12.503906 7.429687-19.789062 7.429687zm-112.96875-425.523437c-31.066406 0-59.605469 12.398437-80.367188 34.914062-21.070312 22.855469-32.675781 54.449219-32.675781 88.964844 0 36.417968 13.535157 68.988281 43.882813 105.605468 29.332031 35.394532 72.960937 72.574219 123.476562 115.625l.09375.078126c17.660156 15.050781 37.679688 32.113281 58.515625 50.332031 20.960938-18.253907 41.011719-35.34375 58.707031-50.417969 50.511719-43.050781 94.136719-80.222656 123.46875-115.617188 30.34375-36.617187 43.878907-69.1875 43.878907-105.605468 0-34.515625-11.605469-66.109375-32.675781-88.964844-20.757813-22.515625-49.300782-34.914062-80.363282-34.914062-22.757812 0-43.652344 7.234374-62.101562 21.5-16.441406 12.71875-27.894532 28.796874-34.609375 40.046874-3.453125 5.785157-9.53125 9.238282-16.261719 9.238282s-12.808594-3.453125-16.261719-9.238282c-6.710937-11.25-18.164062-27.328124-34.609375-40.046874-18.449218-14.265626-39.34375-21.5-62.097656-21.5zm0 0"/></svg>
+                                        {{ productHelper.wishlist() }}
+                                    </div>
+                                {% endif %}
+                            </form>
+                            {% if productHelper.shipping() %}
+                            <div class="box-frete">
+                                {{ productHelper.shipping() }}
+                                <form class="new-frete flex justify-between">
+                                    <label class="box-left flex align-center">
+                                        <svg class="icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512">
+                                            <path d="M386.689,304.403c-35.587,0-64.538,28.951-64.538,64.538s28.951,64.538,64.538,64.538    c35.593,0,64.538-28.951,64.538-64.538S422.276,304.403,386.689,304.403z M386.689,401.21c-17.796,0-32.269-14.473-32.269-32.269    c0-17.796,14.473-32.269,32.269-32.269c17.796,0,32.269,14.473,32.269,32.269C418.958,386.738,404.485,401.21,386.689,401.21z"></path>
+                                            <path d="M166.185,304.403c-35.587,0-64.538,28.951-64.538,64.538s28.951,64.538,64.538,64.538s64.538-28.951,64.538-64.538    S201.772,304.403,166.185,304.403z M166.185,401.21c-17.796,0-32.269-14.473-32.269-32.269c0-17.796,14.473-32.269,32.269-32.269    c17.791,0,32.269,14.473,32.269,32.269C198.454,386.738,183.981,401.21,166.185,401.21z"></path>
+                                            <path d="M430.15,119.675c-2.743-5.448-8.32-8.885-14.419-8.885h-84.975v32.269h75.025l43.934,87.384l28.838-14.5L430.15,119.675z"></path>
+                                            <rect x="216.202" y="353.345" width="122.084" height="32.269"></rect>
+                                            <path d="M117.781,353.345H61.849c-8.912,0-16.134,7.223-16.134,16.134c0,8.912,7.223,16.134,16.134,16.134h55.933    c8.912,0,16.134-7.223,16.134-16.134C133.916,360.567,126.693,353.345,117.781,353.345z"></path>
+                                            <path d="M508.612,254.709l-31.736-40.874c-3.049-3.937-7.755-6.239-12.741-6.239H346.891V94.655    c0-8.912-7.223-16.134-16.134-16.134H61.849c-8.912,0-16.134,7.223-16.134,16.134s7.223,16.134,16.134,16.134h252.773v112.941    c0,8.912,7.223,16.134,16.134,16.134h125.478l23.497,30.268v83.211h-44.639c-8.912,0-16.134,7.223-16.134,16.134    c0,8.912,7.223,16.134,16.134,16.134h60.773c8.912,0,16.134-7.223,16.135-16.134V264.605    C512,261.023,510.806,257.538,508.612,254.709z"></path>
+                                            <path d="M116.706,271.597H42.487c-8.912,0-16.134,7.223-16.134,16.134c0,8.912,7.223,16.134,16.134,16.134h74.218    c8.912,0,16.134-7.223,16.134-16.134C132.84,278.82,125.617,271.597,116.706,271.597z"></path>
+                                            <path d="M153.815,208.134H16.134C7.223,208.134,0,215.357,0,224.269s7.223,16.134,16.134,16.134h137.681    c8.912,0,16.134-7.223,16.134-16.134S162.727,208.134,153.815,208.134z"></path>
+                                            <path d="M180.168,144.672H42.487c-8.912,0-16.134,7.223-16.134,16.134c0,8.912,7.223,16.134,16.134,16.134h137.681    c8.912,0,16.134-7.223,16.134-16.134C196.303,151.895,189.08,144.672,180.168,144.672z"></path>
+                                        </svg>
+                                        <span class="text">SIMULADOR DE FRETE:</span>
+                                        <input type="tel" class="crazy_cep" name="number-frete" minlength="9" required maxlength="9" placeholder="00000-000">
+                                    </label>
+                                    <button class="submit-frete">OK</button>
+                                </form>
+                                <div class="result"></div>
+                            </div>
+                            {% endif %} 
+                            {{ productHelper.social() }}       
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+   
+    {% if productHelper.bundle() %}
+    <div class="compre-junto">
+        <div class="title-section"><span class="string uppercase">Compre Junto</span></div>
+        <div class="product-cross-sell row">
+            {{ productHelper.bundle() }}
+        </div>
+    </div>
+    {% endif %}
+
+    <div class="page-info-product">
+        <div id="ProdBlock" class="product-tabs">
+            <div id="ProdAbas" class="abasProduto tab-panel">
+                <ul class="list">
+                    {% for key, tab in productTabs %}
+                        {% if tab.container_id and (key != 'payment_methods') %}
+                        <li id="{{ tab.id }}" data-name="{{ key }}" {% if key=='description' %}class="aberta" {% endif %}>
+                        <a href="#" data-tab-container-id="{{ tab.container_id }}" data-tab-url="{{ tab.url }}">{{ tab.description }}</a>
+                        </li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
+        
+            <div id="descricao" class="prodBox">
+                <div class="board">
+                    <div class="board_htm description">
+                        {{ product.description ? product.description : product.description_small }}
+                    </div>
+                </div>
+            </div>
+        
+            <div id="itensInclusos" class="prodBox">
+                <div class="board">
+                    {{ product.included_items }}
+                </div>
+            </div>
+        
+            <div id="coments" class="prodBox">
+                <div class="board">
+                    {% element 'product/comments' %}
+                </div>
+            </div>
+        
+            <div id="caracteristicas" class="prodBox">
+                <div class='board'>
+                    {% element 'product/properties' %}
+                </div>
+            </div>
+        
+            {{ productTabs.custom.content }}
+            {{ productTabs.downloads.content }}
+        
+            <div id="garantia" class="prodBox">
+                <img class="loader" src="{{ tray.paths.system_image }}/big-loading.svg"  />
+            </div>
+            {#<div data-app="product.payment-methods" id="formasPagto" class="prodBox"  ></div>#}
+        </div>     
+    </div>
+
+
+
+    <div class="product-related">
+        <div class="section-showcase">
+            {% element 'showcase' { 
+                "products": product.related_products,
+                "slide" : "true",
+                "showcaseTitle": "Produtos relacionados"
+            } %}
+        </div>
+        <div class="section-showcase">
+            <div class="showcase">
+                <div class="title-section">Histórico de navegação</div>
+                <div class="content-visited"></div>
+                <!-- <div class="list-slide visited">
+                    
+                </div> -->
+            </div>
+        </div>
+    </div>
+</div>

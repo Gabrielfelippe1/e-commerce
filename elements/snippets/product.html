@@ -1,0 +1,49 @@
+<div class="product">
+    <div class="image">
+        <a href="{{ product.link }}" class="space-image {{ settings.moldura ? 'large' }} {{ settings.dark_img ? 'dark' }} {{ settings.image_list and product.images[1] and (not utils.is_mobile) ? 'second' }}">
+            <img class="{{ slide ? 'lazyload' : 'lazyload' }} transform" src="{{ asset('img/large.png') }}" data-src="{{ settings.type_img ? product.images[0].full : product.images[0].large }}" alt="{{ product.name }}">
+            {% if settings.image_list and product.images[1] and (not utils.is_mobile) %}<img class="lazyload transform" src="{{ asset('img/large.png') }}" data-src="{{ settings.type_img ? product.images[1].full : product.images[1].large }}" alt="{{ product.name }}">{% endif %}
+            <!--<div class="view">VER DETALHES</div>-->
+            {% if product.price_offer and settings.tag_desconto %}
+            {% set porcentagemDesconto = 100 - ( product.price_offer / product.price ) * 100 %}
+            {% if porcentagemDesconto < 100 %}
+            <div class="discount-line">-{{ porcentagemDesconto|number_format }}%</div>
+            {% endif %}  
+            {% endif %}
+        </a>
+        {% if product.available and (product.stock > 0 or settings.without_stock_sale) and not product.upon_request %}
+            {% element 'snippets/add_variants' { "product": product } %}
+        {% endif %}
+    </div>
+    <a href="{{ product.link }}" class="info-product">
+        <div class="product-name">{{ product.name }}</div>
+        <div class="down-line">
+            {% if settings.star_list %}
+            <div class="list-star flex justify-center">
+                {% element 'snippets/ranking' {
+                    'nota': product.ranking,
+                } %}
+            </div>
+            {% endif %}
+            <div class="box-price">
+                <div class="price">{% element 'snippets/price' {"product": product} %}</div>
+                <div class="product-payment">
+                    {{ product.payment }}
+                </div>
+            </div>
+        </div>
+    </a>
+    {% if pages.current == 'catalog' and settings.compare %}
+    <div class="compare-buttons">
+        {% set compareCSS = 'compare-hidden' %}
+        <a data-compare="remove" href="{{ links.compare_delete ~ product.id }}" class="flex justify-center align-center {{ not product.compare ? compareCSS }}">
+            <span class="filter-checkbox checked"></span>
+            {{ Translation("remover_comparar") }}
+        </a>
+        <a data-compare="add" href="{{ links.compare_add  ~ product.id }}" class="flex justify-center align-center {{ product.compare ? compareCSS }}">
+            <span class="filter-checkbox"></span>
+            {{ Translation("comparar_produto") }}
+        </a>
+    </div>
+    {% endif %}
+</div>

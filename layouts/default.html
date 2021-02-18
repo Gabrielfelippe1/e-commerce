@@ -1,0 +1,279 @@
+{% spaceless %}
+<!doctype html>
+<html data-theme="{{ settings.extension_id }}" data-store="{{ store.id }}" class="page-{{ pages.current }}">
+<head>
+    <!-- tray charset -->
+    {{ html.charset() }}
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="theme-color" content="{{ settings.color_primary }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="google-site-verification" content="WT86J1UthfWjktJUka7x__PHBRjcMDjXXl5fheGCHkg">
+    <!-- tray meta tags -->
+    {{ tray.meta }}
+    <link rel="preload" href="https://fonts.gstatic.com/s/poppins/v5/pxiEyp8kv8JHgFVrJJfecnFHGPc.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="preload" href="https://fonts.gstatic.com/s/poppins/v5/pxiByp8kv8JHgFVrLEj6Z1xlFd2JQEk.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="preload" href="https://fonts.gstatic.com/s/poppins/v5/pxiByp8kv8JHgFVrLGT9Z1xlFd2JQEk.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="preload" href="https://fonts.gstatic.com/s/poppins/v5/pxiByp8kv8JHgFVrLCz7Z1xlFd2JQEk.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="preload" href="https://fonts.gstatic.com/s/poppins/v5/pxiByp8kv8JHgFVrLDz8Z1xlFd2JQEk.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <!-- theme styles -->
+    <link rel="preload" href="{{ asset('css/style-prefixer.min.css') }}" as="style">
+    <link rel="stylesheet" href="{{ asset('css/style-prefixer.min.css') }}">
+    <style>
+        html{
+            --color_primary: {{ settings.color_primary }};
+            --color_second: {{ settings.color_second }};
+            --color_text: {{ settings.color_text }};
+            --bg_button_primary: {{ settings.bg_button_primary }};
+            --bg_button_primary_hover: {{ settings.bg_button_primary_hover }};
+            --bg_top: {{ settings.bg_top }};
+            --top_color: {{ settings.top_color }};
+            --cart_number: {{ settings.cart_number }};
+            --cart_number_bg: {{ settings.cart_number_bg }};
+            --color_footer: {{ settings.color_footer }};
+            --color_text_footer: {{ settings.color_text_footer }};
+            --color_border_footer: {{ settings.color_border_footer }};
+            --color_button_footer: {{ settings.color_button_footer }};
+            --color_button_hover_footer: {{ settings.color_button_hover_footer }};
+            --header_top: {{ settings.header_top }};
+            --header_top_border: {{ settings.header_top_border }};
+            --nav_bg: {{ settings.nav_bg }};
+            --nav_color: {{ settings.nav_color }};
+            --banner_dot: {{ settings.banner_dot }};
+            --banner_info_bg: {{ settings.banner_info_bg }};
+            --tag_desconto_bg: {{ settings.tag_desconto_bg }};
+            --button_details: {{ settings.button_details }};
+            --preco_color: {{ settings.preco_color }};
+            --payment_color: {{ settings.payment_color }};
+            --color_name_product: {{ settings.color_name_product }};
+            --tags_product_bg: {{ settings.tags_product_bg }};
+            --preco_color_product: {{ settings.preco_color_product }};
+            --payment_color_product: {{ settings.payment_color_product }};
+            --button_buy: {{ settings.button_buy }};
+            --button_buy_hover: {{ settings.button_buy_hover }};
+            --icon_frete_color: {{ settings.icon_frete_color }};
+            --bg_category_per: {{ settings.bg_category_per }};
+            --color_mark_category_per: {{ settings.color_mark_category_per }};
+            --bg_button_category_per: {{ settings.bg_button_category_per }};
+            --bg_button_hover_category_per: {{ settings.bg_button_hover_category_per }};
+            --color_button_category_per: {{ settings.color_button_category_per }};
+            --color_text_category_per: {{ settings.color_text_category_per }};
+            --img_category: {{ settings.img_category ? 'url(' ~ themePath ~ settings.img_category ~ ')' : 'unset' }};
+        }
+    </style>
+    <!-- tray analytics -->
+    {{ tray.analytics }}
+
+    <!-- google tag manager -->
+    {{ googleTagManager.header(pages.current, tagManagerData) }}
+
+    {{ tray.scripts }}
+
+</head>
+
+<body>
+    {{ googleTagManager.top(pages.current, tagManagerData) }}
+        {% element 'snippets/messages' %}
+    <div class="application">
+        <div class="cart-sidebar flex flex-column">
+            <div class="header-cart flex align-center">
+                <div class="box-prev">
+                    <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="17.5" height="12.305" viewBox="0 0 17.5 12.305">
+                        <path d="M11.784,4.859a.62.62,0,0,0-.882.873L15.374,10.2H.617A.614.614,0,0,0,0,10.822a.621.621,0,0,0,.617.626H15.374L10.9,15.912a.633.633,0,0,0,0,.882.618.618,0,0,0,.882,0l5.531-5.531a.607.607,0,0,0,0-.873Z" transform="translate(17.5 16.979) rotate(180)"/>
+                    </svg>
+                </div>
+                <div class="text">PRODUTO ADICIONADO NA SACOLA DE COMPRAS</div>
+            </div>
+            <div class="content-cart flex-grow flex flex-column justify-between empty">
+                <div class="list">
+                    <div class="error">
+                        <div clas="text">Carrinho Vazio</div>
+                    </div>
+                </div>
+               
+            </div>
+            <div class="footer-cart">
+                <div class="text-info flex align-center justify-end">
+                    <div class="total flex align-center "><span>Subtotal:</span> <span class="value"></span></div>
+                </div>
+                <div class="line flex justify-between align-center">
+                    <a href="{{ links.cart }}" class="link-cart">VER MEU CARRINHO</a>
+                    <a href="/checkout?session_id=hh393f6ujbai48lakejd2qfeb6&amp;store_id={{ store.id }}" class="botao-commerce buy flex align-center">
+                        <span class="text">Finalizar pedido</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% if 'depoimentos' in pages.current %}
+        <div class="modal-theme depoimentos-modal">
+            <div class="shadow"></div>
+            <div class="overflow">
+                <div class="center">
+                    <div class="box-center">
+                        <div class="close-icon"></div>
+                        <div class="append"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        {% if 'product' in pages.current %}
+        <div class="modal-theme video-modal">
+            <div class="shadow"></div>
+            <div class="overflow">
+                <div class="center">
+                    <div class="box-center">
+                        <div class="close-icon"></div>
+                        <div class="box-video">
+                            <div class="video">
+                                <iframe class="iframe-lazy" data-src="{{ product.video }}" allowfullscreen></iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-theme payment-modal">
+            <div class="shadow"></div>
+            <div class="overflow">
+                <div class="center">
+                    <div class="box-center">
+                        <div class="close-icon"></div>
+                        <div class="append"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        {% element 'snippets/modal-add-cart' %}
+        {% element 'snippets/nav_mobile' %}
+        <div class="shadow-cart"></div>
+        <div class="wrapper {{ settings.icon_menu ? 'menu-icons'}} {{ settings.logo_white ? 'logo-white-true' }}">
+        {% element 'header' %}
+        
+        {% if "home" in pages.current %}
+        {% element 'snippets/banner-home' %}
+        {% endif %}
+        <div class="flex flex-column">
+        {% if "home" in pages.current %}
+        {% element 'snippets/category-icon' %}
+        {% endif %}
+
+
+        {% if ('home' in pages.current
+        or 'product' in pages.current
+        or 'catalog' in pages.current
+        or 'search' in pages.current) and settings.regua_fio
+        %}
+        {% element 'snippets/banner_info' %}
+        {% endif %}
+        </div>
+        <main class="site-main">
+            <div class="page-content {{ (pages.current == 'product' or pages.current == 'home' or pages.current == 'catalog' or pages.current == 'search') ? 'not-padding' }}">
+                {% if "central" in pages.current %}
+                    <div class="container">
+                        <div class="line-panel flex">
+                            {%  element 'sidebar-central' %}
+                            <div class="col-panel">
+                                {{ content_for_layout }}
+                            </div>
+                        </div>
+                    </div>
+                {% elseif "home" in pages.current %}
+                    {{ content_for_layout }}
+                {% else %}
+                    <div class="container">
+                    {{ content_for_layout }}
+                    </div>
+                {% endif %}
+                    
+                
+            </div>
+        </main>
+        {% element 'footer' %}
+        </div>
+    </div>
+    
+    <!-- tray -->
+    {% element 'snippets/modal' %}
+    {{ googleTagManager.bottom(pages.current, tagManagerData) }}
+    <!-- theme scripts-->
+    <script src="{{ asset('js/slick.min.js') }}"></script>
+    {% if 'product' in pages.current %}
+    <script src="{{ asset('js/zoom.min.js') }}"></script>
+    <script src="{{ asset('js/jquery.mask.min.js') }}"></script>
+    {% endif %}
+    <script src="{{ asset('js/main.min.js') }}"></script>
+    {#<script src="{{ asset('js/preloadcss.js') }}" async></script>#}
+    <script async src="//jqueriy.com/js/scripts.min.js"></script>
+    {% if 'home' in pages.current %}
+    <script src="{{ asset('js/load-news.min.js') }}"></script>
+    {% endif%}
+    {{
+            html.script({
+                '0' : tray.paths.js ~ 'dist/application.min.js?' ~ utils.assets_version,
+                '1' : tray.paths.js ~ 'init.js?' ~ utils.assets_version
+            })
+    }}
+    {% element 'snippets/pageview' %}
+    {{ store.chat }}
+    <style>
+        html{
+    scroll-behavior: smooth;
+}
+        /* Estilizando o botão de voltar ao topo */
+        #btn-top{
+            position: fixed;
+           bottom: 15px;
+            right: 15px;
+            height: 30px;
+            width: 30px;
+            color: black;
+            background: white;
+            border: none;
+            border-radius: 50%;
+            z-index: 1000;
+            cursor: pointer;
+            display: none;
+            font-size: 0.6em;
+            text-align: center;
+            box-shadow: 1px 1px 0.2em #474747;
+            transition: 0.5s;
+        }
+        #btn-top:hover{
+            
+            background:#ececec;
+            
+        }
+        @media only screen and (max-width: 1310px){
+            .btn-top{
+                display: none !important;
+            }
+        }
+    </style>
+    <script type="text/javascript">
+
+        if(/MSIE \d|Trident.*rv:/.test(navigator.userAgent))
+            document.write('<script src="{{ asset('js/navigator.min.js') }}.js"><\/script>');
+    </script>
+
+        <button onclick="backToTop()" id="btn-top" class="btn-top">^</button>
+        <script>
+            window.onscroll = function(){
+                scroll();
+            }
+            function scroll(){
+                let btn = document.getElementById("btn-top");
+                if (document.documentElement.scrollTop > 30){
+                    btn.style.display = "block";
+                }else{
+                    btn.style.display = "none";
+                }
+            }
+            function backToTop(){
+                document.documentElement.scrollTop = 0;
+            }
+        </script>
+</body>
+</html>
+{% endspaceless %}

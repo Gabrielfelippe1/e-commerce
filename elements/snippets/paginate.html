@@ -1,0 +1,23 @@
+<div class="flex align-center justify-center">
+    {#<div class="search-counter">
+        {{ paginate.counter('Resultado <strong>{:count} produtos em {:pages} p&aacute;ginas</strong>') }}
+    </div>#}
+
+    {% set next = '<svg enable-background="new 0 0 898.3 898.3" version="1.1" viewBox="0 0 898.3 898.3" xml:space="preserve" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="120.2 882.5 553.6 449.2 120.2 15.8 0 136 313.2 449.2 0 762.3" />
+        <polygon points="344.7 762.3 464.9 882.5 898.3 449.2 464.9 15.8 344.7 136 657.9 449.2" />
+    </svg>' %}
+
+    <div class="paginate-links">
+        {% if paginate.params.pageCount > 1 %}
+        {{ paginate.first('< Primeira...', {'class': 'page-first'}) }}
+        {{ paginate.numbers({
+        'modulus': 3,
+        'separator': '',
+        'class': 'page-link',
+        'currentClass': 'page-current'
+        }) }}
+        {{ paginate.last('...Última >', {'class': 'page-last'}) }}
+        {% endif %}
+    </div>
+</div>

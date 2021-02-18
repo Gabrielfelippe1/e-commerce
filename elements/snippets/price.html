@@ -1,0 +1,51 @@
+<div class="product-price">
+    {% if product.available %}
+        {% if product.stock > 0 or settings.without_stock_sale %} 
+            {% if product.upon_request %}
+                <p>Produto Sob Consulta</p>
+            {% else %}
+            
+                {% if product.has_variation%}
+                    {% if false %}<span class="price-various">{{ Translation('a_partir_de') }}</span> {% endif %}
+                {% endif %} 
+                {% if settings.price_before_style == 'strike' or settings.price_before_style == 'strike-depor' %}
+                    {% set priceStyle = 'strike' %}
+                {% endif %}
+                {% if settings.price_before_style == 'depor' or settings.price_before_style == 'strike-depor' %}
+                {% set priceOld = 'De: ' %}
+                {% endif %}
+                {% if product.price_offer > 0 and product.show_price %}
+                    <div class="price-before {{ priceStyle }}">
+                        <span class="line-price">De: {{ settings.currency }} {{ product.price|currency }}</span>
+                    </div>
+                    <div class="price-off">
+                        
+                        {% if product.has_other_prices %}
+                            <span class="msg-top"></span> R$ {{ product.price_offer|currency  }}
+                        {% else %}
+                        <span class="por">Por</span> R$ {{ product.price_offer|currency  }}
+                        {% endif %}
+                        
+                    </div>
+                {% else %}
+                    <span class="price-off">
+                        {% if product.has_other_prices %}
+                            <span class="msg-top"></span>
+                            R$ {{ product.price|currency  }}
+                        {% else %}
+                            R$ {{ product.price|currency  }}
+                        {% endif %}
+                    </span>
+                {% endif %}
+            {% endif %}
+            
+        {% else %} 
+            <p>Esgotado!</p>
+        {% endif %} 
+        
+    {% else %} 
+        <p>Indispon&iacute;vel</p> 
+        
+    {% endif %} 
+</div>
+    

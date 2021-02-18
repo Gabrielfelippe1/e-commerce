@@ -1,0 +1,124 @@
+<div class="catalog-header">
+    {% if banner.title %}
+        <div class="banner">
+            <div class="{{ banners.title.type == 'javascript' ? 'slide-catalog' }}">
+            {% if banners.title.type == "javascript" %}
+                {% for slide in banners.title.slides %}
+                <div class="item">
+                    {% if slide.link %}
+                    <a href="{{ slide.link }}" target="{{ slide.target }}">
+                        <img src="{{ asset('img/square.png') }}" data-lazy="{{ slide.image }}" alt="banner">
+                    </a>
+                    {% else %}
+                    <a>
+                        <img src="{{ asset('img/square.png') }}" data-lazy="{{ slide.image }}" alt="banner">
+                    </a>
+                    {% endif %}
+                </div>
+                {% endfor %}
+    
+            {% else %}
+                <div class="item">
+                    {% if banners.title.link %}
+                    <a href="{{ banners.home.link }}" target="{{ banners.home.target }}">
+                        <img src="{{ banners.home.src }}" alt="banner">
+                    </a>
+                    {% else %}
+                    <a>
+                        <img src="{{ banners.home.src }}" alt="banner">
+                    </a>
+                    {% endif %}
+                </div>
+            {% endif %}
+            </div>
+    
+        </div>
+    {% endif %}
+    </div>
+    
+        <div class="catalog-cols flex">
+            {% if settings.col_lateral %}
+            <div class="sidebar-category">
+                {% element 'smartfilter' %}
+            </div>
+            {% endif %}
+            <div class="col-content">
+                {% element 'snippets/breadcrumb' %}
+                <div class="bar-info-catalog flex justify-between {{ products|length > 0 ? '' : 'null' }}">
+                    
+                    {% if search.word %}
+                    <h1 class="catalog-name">{{ search.word }}</h1>
+                    {% else %}
+                    <h1 class="catalog-name">Todos os produtos</h1>
+                    <h1 class="catalog-name">{{ category.name }}</h1>
+                    {% endif %}
+                    {% if products|length > 0 %}
+                    <div class="system-filter flex justify-center">
+                        {% if settings.compare %}
+                            <a href="/loja/comparador.php?loja={{store.id}}&IdDep={{category.id}}" class="button-compare">{{ Translation("comparar_produto") }}</a>
+                        {% endif %}
+                        <div class="button-filter">Filtrar</div>
+                        {% element 'snippets/filter' {
+                            'brands': category.brands
+                        } %}
+                    </div>
+                    {% endif %} 
+                </div>
+                {% if category.small_description %}
+                <div class="description">{{ category.small_description }}</div>
+                {% endif %}
+                {% if products|length > 0 %}
+                
+                <div class="catalog-content">
+                    {% element 'showcase-catalog' {
+                        "products": products
+                    } %}
+                </div>
+            
+                <div class="catalog-footer pagination">
+                    {% element 'snippets/paginate' %}
+                </div>
+            
+            {% else %}
+                <div class="catalog-empty">
+                    <p>): {{ Translation('nenhum_resultado') }}</p>
+                </div>
+            {% endif %}
+            </div>
+        </div>
+    
+    {% if banner.bottom %}
+        <div class="banner banner-bottom">
+                        <div class="{{ banners.bottom.type == 'javascript' ? 'slide-catalog' }}">
+                {% if banners.bottom.type == "javascript" %}
+                    {% for slide in banners.bottom.slides %}
+                    <div class="item">
+                        {% if slide.link %}
+                        <a href="{{ slide.link }}" target="{{ slide.target }}">
+                            <img src="{{ asset('img/square.png') }}" data-lazy="{{ slide.image }}" alt="banner">
+                        </a>
+                        {% else %}
+                        <a>
+                            <img src="{{ asset('img/square.png') }}" data-lazy="{{ slide.image }}" alt="banner">
+                        </a>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+        
+                {% else %}
+                    <div class="item">
+                        {% if banners.bottom.link %}
+                        <a href="{{ banners.bottom.link }}" target="{{ banners.bottom.target }}">
+                            <img src="{{ banners.bottom.src }}" alt="banner">
+                        </a>
+                        {% else %}
+                        <a>
+                            <img src="{{ banners.bottom.src }}" alt="banner">
+                        </a>
+                        {% endif %}
+                    </div>
+                {% endif %}
+                </div>
+        </div>
+    {% endif %}
+    

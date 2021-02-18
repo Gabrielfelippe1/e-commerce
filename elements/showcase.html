@@ -1,0 +1,19 @@
+{% if products|length > 0 %}
+<div class="showcase">
+    <h2 class="title-section">{{ showcaseTitle }}</h2>
+    {% if products|length %}
+    <div class="list-product {{ slide ? 'list-slide' : 'flex f-wrap' }}">
+        {% for product in products %} 
+        <div class="item flex">
+            {% element 'snippets/product' {
+                "product": product,
+                "slide": slide
+            } %}
+        </div>          
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="msg-list flex justify-center">): Nenhum produto encontrado</div>
+    {% endif %}
+</div>
+{% endif %}

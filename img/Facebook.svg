@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="44" height="44" viewBox="0 0 44 44">
+  <defs>
+    <clipPath id="clip-path">
+      <circle id="Ellipse_1" data-name="Ellipse 1" cx="22" cy="22" r="22" transform="translate(190 189)" fill="#fff"/>
+    </clipPath>
+  </defs>
+  <g id="Mask_Group_1" data-name="Mask Group 1" transform="translate(-190 -189)" clip-path="url(#clip-path)">
+    <g id="simbolo-de-aplicativo-do-facebook" transform="translate(192.424 197)">
+      <path id="f_1_" d="M20.014,28V15.229H24.3l.643-4.979H20.014V7.072c0-1.441.4-2.423,2.467-2.423h2.634V.195A35.717,35.717,0,0,0,21.276,0c-3.8,0-6.4,2.32-6.4,6.579V10.25h-4.3v4.979h4.3V28Z" transform="translate(0)" fill="#010002"/>
+    </g>
+  </g>
+</svg>

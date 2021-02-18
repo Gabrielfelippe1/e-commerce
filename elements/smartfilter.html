@@ -1,0 +1,303 @@
+<div class="hide-menu"></div>
+<div>
+<div class="box-fixed">
+    <div class="close-modal"></div>
+    <div class="center flex align-center justify-center">
+        <div class="box-white">
+            <svg class="close-box" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 212.982 212.982">
+                <path d="M131.804,106.491l75.936-75.936c6.99-6.99,6.99-18.323,0-25.312   c-6.99-6.99-18.322-6.99-25.312,0l-75.937,75.937L30.554,5.242c-6.99-6.99-18.322-6.99-25.312,0c-6.989,6.99-6.989,18.323,0,25.312   l75.937,75.936L5.242,182.427c-6.989,6.99-6.989,18.323,0,25.312c6.99,6.99,18.322,6.99,25.312,0l75.937-75.937l75.937,75.937   c6.989,6.99,18.322,6.99,25.312,0c6.99-6.99,6.99-18.322,0-25.312L131.804,106.491z"></path>
+            </svg>
+            {% if (not filters) and (not filter_options) %}
+            <div class="box-content">
+                <div class="title title-bar flex align-center">Categorias</div>
+                <ul class="list">
+                    {% for listCategory in categories %}
+                    <li class="{{ listCategory.children ? 'sub' }}">
+                        <a class="sub-filter {{ category.id == listCategory.id ? 'active' }}" href="{{ listCategory.link }}">{{ listCategory.name }}</a>
+                        {% if listCategory.children %}
+                        <ul>
+                            {% for level2 in listCategory.children %}
+                            <li class="{{ category.id == level2.id ? 'active' }}">
+                                <a href="{{ level2.link }}">{{ level2.name }}</a>
+                            </li>
+                            {% endfor %}
+                            <li>
+                                <a href="{{ listCategory.link }}">Visite a Categoria</a>
+                            </li>
+                        </ul>
+                        {% endif %}
+                        
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+            {% if filters %}
+                {% set smartPages = ['catalog', 'search'] %}
+                {% if filters and pages.current in smartPages %}
+                <div class="title">FILTRAR MAIS</div>
+                <form name="form-filter" method="get" class="smart-filter">
+                    {% set type = "" %}
+                    <input type="hidden" name="loja" value="{{ store.id }}">
+                    <input type="checkbox" name="open-filter" id="open-filter" class="hidden">
+    
+                    {% if search.word %}
+                    <input name="palavra_busca" type="hidden" value="{{ search.word }}">
+                    {% endif %}
+    
+                    {% if category.id %}
+                        <input type="hidden" name="categoria" value="{{ category.id }}">
+                    {% endif %}
+    
+                    <div class="filters-list">
+                    {% if filters.applied %}
+                    <div class="applied-filters">
+                        <ul>
+                            {% for applied in filters.applied %}
+                                {% for item in applied %}
+                                    {% set type = item.type %}
+                                    <li>
+                                        <a href="{{ item.url }}">{{ item.title }}<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 348.333 348.334"><path d="M336.559,68.611L231.016,174.165l105.543,105.549c15.699,15.705,15.699,41.145,0,56.85   c-7.844,7.844-18.128,11.769-28.407,11.769c-10.296,0-20.581-3.919-28.419-11.769L174.167,231.003L68.609,336.563   c-7.843,7.844-18.128,11.769-28.416,11.769c-10.285,0-20.563-3.919-28.413-11.769c-15.699-15.698-15.699-41.139,0-56.85   l105.54-105.549L11.774,68.611c-15.699-15.699-15.699-41.145,0-56.844c15.696-15.687,41.127-15.687,56.829,0l105.563,105.554   L279.721,11.767c15.705-15.687,41.139-15.687,56.832,0C352.258,27.466,352.258,52.912,336.559,68.611z"></path></svg></a>
+                                    </li>
+                                {% endfor %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    {% endif %}
+    
+                    {% for myFilter in filters %}
+    
+                        {% if myFilter.items and myFilter.title %}
+                            <div class="sub-filter {{  myFilter.items|length < 8 ? 'active' }}">{{ myFilter.title }}</div>
+                            <ul>
+                            {% for item in myFilter.items %}
+                                {% set type = item.type %}
+                                <li>
+                                    {% if item.type == "link" %}
+                                        <a href="{{ item.url }}">{{ item.title }}</a>
+                                    {% endif %}
+    
+                                    {% if item.type == "checkbox" %}
+                                        {% if item.url != '' %}
+                                            {% set checked = item.applied ? 'checked="checked"' %}
+                                            <div class="flex align-center space-radio">
+                                                <input type="checkbox" id="id{{ item.name }}{{ loop.index }}" name="{{ item.name }}" value="{{ item.value }}" {{ checked }} />
+                                                <label for="id{{ item.name }}{{ loop.index }}" class="icon-radio"></label>
+                                                <a href="{{ item.url }}">
+                                                    {{ item.title }}
+                                                </a>
+                                            </div>
+                                        {% else %}
+                                            <label class="flex align-center">
+                                                {% set checked = item.applied ? 'checked="checked"' %}
+                                                <input type="checkbox" name="{{ item.name }}" value="{{ item.value }}" {{ checked }} />
+                                                <div class="icon-radio"></div>
+                                                {{ item.title }}
+                                            </label>
+                                        {% endif %}
+                                    {% endif %}
+                                </li>
+                            {% endfor %}
+                            </ul>
+    
+                        {% elseif myFilter|length %}
+    
+                        {% for var in myFilter %}
+                            {% if var.title %}
+                                <div class="sub-filter {{  myFilter.items|length < 8 ? 'active' }}">{{ var.title }}</div>
+                            <ul>
+                                {% for item in var.items %}
+                                {% set type = item.type %}
+                                <li>
+                                    {% if item.type == "link" %}
+                                    <a href="{{ item.url }}">{{ item.title }}</a>
+                                    {% endif %}
+    
+                                        {% if item.type == "checkbox" %}
+                                            {% if item.url != '' %}
+                                                {% set checked = item.applied ? 'checked="checked"' %}
+                                                <input type="checkbox" name="{{ item.name }}" value="{{ item.value }}" {{ checked }} />
+                                                <a href="{{ item.url }}">
+                                                    {{ item.title }}
+                                                </a>
+                                            {% else %}
+                                                <label>
+                                                    {% set checked = item.applied ? 'checked="checked"' %}
+                                                    <input type="checkbox" name="{{ item.name }}" value="{{ item.value }}" {{ checked }} />
+                                                    {{ item.title }}
+                                                </label>
+                                            {% endif %}
+                                        {% endif %}
+                                </li>
+                                {% endfor %}
+                            </ul>
+                            {% endif %}
+                        {% endfor %}
+    
+                        {% endif %}
+    
+                    {% endfor %}
+                    </div>
+                    {% if type == "checkbox" %}
+                        <button type="submit" class="filter-button botao-commerce">{{ Translation('filtrar') }}</button>
+                    {% endif %}
+                    {% endif %}
+                </form>
+            {% else %}
+                {% set smartPages = ['catalog', 'search'] %}
+                {% if filter_options and pages.current in smartPages %}
+                <div class="title">FILTRAR MAIS</div>
+                <form name="form-filter" method="get" class="smart-filter">
+    
+                    <input type="hidden" name="loja" value="{{ store.id }}">
+                    {% if search.word %}
+                    <input name="palavra_busca" type="hidden" value="{{ search.word }}">
+                    {% endif %}
+    
+                    {% if category.id %}
+                    <input type="hidden" name="categoria" value="{{ category.id }}">
+                    {% endif %}
+    
+                    <div>
+                        
+                        {% if filter_options.categories %}
+                        <section class="filter__block filter__block--categories">
+                            <h4 class="filter__title">Categorias</h4>
+                            <ul class="filter__list">
+                                {% for category in filter_options.categories %}
+                                {% set category_applied = category.key|convert_encoding('UTF-8', 'ISO-8859-1')  in filtered_options.categories ? true : false %}
+    
+                                <li class="filter__item">
+                                    <input id="{{ category.key }}" class="filter__input filter__input--category" type="checkbox"
+                                        name="categories[]" value="{{ category.key|convert_encoding('UTF-8', 'ISO-8859-1') }}"
+                                        {{ category_applied ? 'checked' }}>
+                                    <label class="filter__label" for="{{ category.key }}">
+                                        <span class="filter__name filter__name--category"> {{ category.key }}</span>
+                                    </label>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </section>
+                        {% endif %}
+    
+                        {% if filter_options.prices %}
+                        <section class="filter__block filter__block--prices">
+                            <h4 class="filter__title">Preço</h4>
+                            <ul class="filter__list">
+                                {% for price in filter_options.prices.buckets %}
+                                {% set price_applied = false %}
+    
+                                <li class="filter__item">
+                                    {% for price_apply in filtered_options.price %}
+                                    {% set price_applied = price.from and price.to in price_apply ? true : false %}
+                                    {% endfor %}
+    
+                                    <input id="{{ price.from }}-{{ price.to }}" class="filter__input filter__input--price"
+                                        type="checkbox" name="prices[]" value="{{ price.from }},{{ price.to }}"
+                                        {{ price_applied ? 'checked' }}>
+                                    <label class="filter__label" for="{{ price.from }}-{{ price.to }}">
+                                        <span class="filter__name filter__name--price">
+                                            {% if loop.index == 1 %}
+                                            Até {{ settings.currency }} {{ price.to|currency }}
+                                            {% elseif loop.index == filter_options.prices.buckets|length  %}
+                                            Acima de {{ settings.currency }} {{ price.to|currency }}
+                                            {% else %}
+                                            De {{ settings.currency }} {{ price.from|currency }} à {{ settings.currency }}
+                                            {{ price.to|currency }}
+                                            {% endif %}
+                                        </span>
+                                    </label>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </section>
+                        {% endif %}
+    
+                        {% if filter_options.availability %}
+                        <section class="filter__block filter__block--availability">
+                            <h4 class="filter__title">Disponibilidade</h4>
+    
+                            <ul class="filter__list">
+                                {% for availability in filter_options.availability %}
+                                {% set availability_applied = availability.key in filtered_options.availability ? true : false %}
+    
+                                <li class="filter__item">
+                                    <input id="{{ availability.key }}" class="filter__input filter__input--availability" type="checkbox"
+                                        name="availability[]" value="{{ availability.key|convert_encoding('UTF-8', 'ISO-8859-1')}}"
+                                        {{ availability_applied ? 'checked' }}>
+                                    <label class="filter__label" for="{{ availability.key }}">
+                                        <span class="filter__name filter__name--availability">{{ availability.key }}</span>
+                                       
+                                    </label>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </section>
+                        {% endif %}
+    
+                        {% if filter_options.brands %}
+                        <section class="filter__block filter__block--brands">
+                            <h4 class="filter__title">Marcas</h4>
+    
+                            <ul class="filter__list">
+                                {% for brand in filter_options.brands %}
+                                {% set brands_applied = brand.key in filtered_options.brand ? true : false %}
+    
+                                <li class="filter__item">
+                                    <input id="{{ brand.key }}" class="filter__input filter__input--brand" type="checkbox"
+                                        name="brands[]" value="{{ brand.key|convert_encoding('UTF-8', 'ISO-8859-1') }}"
+                                        {{ brands_applied ? 'checked'}}>
+                                    <label class="filter__label" for="{{ item.value }}">
+                                        <span class="filter__name filter__name--brand">{{ brand.key }}</span>
+                                        
+                                    </label>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </section>
+                        {% endif %}
+    
+                        {% if filter_options.properties %}
+                            {% for properties in filter_options.properties %}
+                                {% for prop in properties %}
+                                <section class="filter__block filter__block--properties">
+                                    <ul class="filter__list">
+                                        <h4 class="filter__title">{{ prop.key }}</h4>
+                                        {% for item in prop.values %}
+    
+                                        {% set filter_prop = prop.key ~'||'~ item.key %}
+                                        {% if item.entity == 'variants' %}
+                                          {% set prop_applied = filter_prop|convert_encoding('UTF-8', 'ISO-8859-1') in filtered_options.variant ? true : false %}
+                                        {% else %}
+                                          {% set prop_applied = filter_prop|convert_encoding('UTF-8', 'ISO-8859-1') in filtered_options.propertie ? true : false %}
+                                        {% endif %}
+    
+                                        <li class="filter__item">
+                                            <input id="{{ item.key }}" class="filter__input filter__input--propertie" type="checkbox"
+                                                name="{{item.entity}}[]" value="{{ filter_prop|convert_encoding('UTF-8', 'ISO-8859-1') }}"
+                                                {{ prop_applied ? 'checked'}}>
+                                            <label class="filter__label" for="{{ item.key }}">
+                                                <span class="filter__name filter__name--propertie">{{ item.key }}</span>
+                                              
+                                            </label>
+                                        </li>
+                                        {% endfor %}
+                                    </ul>
+                                </section>
+    
+                                {% endfor %}
+    
+                            {% endfor %}
+                        {% endif %}
+                    
+                    </div>
+    
+                    <button type="submit" class="filter__button">{{ Translation('filtrar') }}</button>
+    
+                </form>
+                {% endif %}
+            {% endif %}
+        </div>
+    </div>
+</div>
+</div>

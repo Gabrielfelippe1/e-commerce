@@ -1,0 +1,18 @@
+{% if categories|length %}
+<div class="line-icons">
+    <div class="container">
+        <div class="line-overflow  flex">
+        {% for category in categories %}
+            {% if category.images %}
+            <a href="{{ category.link }}">
+                <div class="box-icon flex align-center justify-center">
+                    <img class="icon" src="{{ category.images[0] }}" alt="{{ category.name }}">
+                </div>
+                <div class="text">{{ category.name }}</div>
+            </a>
+            {% endif %}
+        {% endfor %}
+        </div>
+    </div>
+</div>
+{% endif %}
